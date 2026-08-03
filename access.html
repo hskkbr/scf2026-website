@@ -110,6 +110,78 @@
             margin-top: 1.5rem;
         }
 
+        .transport-options {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .transport-option {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            box-shadow: none;
+            margin-bottom: 0;
+            padding: 1.25rem;
+        }
+
+        .transport-option h3 {
+            margin-top: 0;
+        }
+
+        .transport-option > span {
+            display: block;
+        }
+
+        .transport-option p:last-child {
+            margin-bottom: 0;
+        }
+
+        .simple-timetable {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .simple-timetable caption {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-align: left;
+        }
+
+        .simple-timetable th,
+        .simple-timetable td {
+            border: 1px solid var(--border-color);
+            padding: 0.65rem;
+        }
+
+        .simple-timetable th {
+            background-color: #edf2f7;
+            color: var(--primary-color);
+        }
+
+        .access-map-image {
+            margin: 1.5rem auto;
+            max-width: 831px;
+        }
+
+        .access-map-image img {
+            border-radius: 8px;
+            display: block;
+            height: auto;
+            width: 100%;
+        }
+
+        .access-map-image figcaption {
+            color: #718096;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+
         ul {
             padding-left: 1.5rem;
         }
@@ -182,6 +254,9 @@
                 padding-top: 0.25rem;
                 padding-bottom: 0.75rem;
             }
+            .transport-options {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -196,7 +271,8 @@
         <ul>
             <li><a href="index.html">トップページへ戻る</a></li>
             <li><a href="#access-detail">会場詳細</a></li>
-            <li><a href="#transportation">送迎について</a></li>
+            <li><a href="#from-airport">鳥取空港からお越しの方</a></li>
+            <li><a href="#from-station">鳥取駅からお越しの方</a></li>
         </ul>
     </nav>
 
@@ -224,10 +300,65 @@
 </section>
 
        
-<section id="transportation">
-    <h2>送迎について</h2>
-    <p>鳥取駅および鳥取空港からレーク大樹への送迎を予定しています</p>
-    <p> 送迎の詳細（時間、場所など）については、別途ご案内いたします。</p>
+<section id="from-airport">
+    <h2>鳥取空港からお越しの方</h2>
+    <p>鳥取空港からレーク大樹への送迎を予定しています。</p>
+    <p>送迎の詳細（時間、場所など）については、別途ご案内いたします。</p>
+</section>
+
+<section id="from-station">
+    <h2>鳥取駅からお越しの方</h2>
+    <p>鳥取駅からの送迎はありませんので、公共交通機関(路線バス)をご利用ください。</p>
+    <p>初日のセッション開始は、2026年10月23日(金) 13:00を予定しています。</p>
+    <p>会場付近のバス停は以下の2つです。どちらのバス停でも会場まで徒歩でアクセス可能です。</p>
+    <figure class="access-map-image">
+        <img src="images/access-bus-stops-map.png" alt="レーク大樹、レーク大樹前バス停、松原バス停の位置を示した地図">
+        <figcaption>レーク大樹と周辺バス停の位置</figcaption>
+    </figure>
+    <div class="transport-options">
+        <section class="transport-option">
+            <h3>「レーク大樹前」バス停を利用する場合</h3>
+            <span>日ノ丸バス</span>
+            <span>系統番号:45,湖山池線（下り）湖山経由 吉岡行き</span>
+            <span>所要金額: 片道 690円（ICOCAの使用可）</span>
+            <table class="simple-timetable">
+                <caption>鳥取駅 ～ レーク大樹前</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">鳥取駅 発</th>
+                        <th scope="col">レーク大樹前 着</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>11:45</td>
+                        <td>12:26</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="transport-option">
+            <h3>「松原」バス停を利用する場合</h3>
+            <span>日ノ丸バス</span>
+            <span>系統番号:50,吉岡線（下り）矢矯行き</span>
+            <span>所要金額: 片道 480円（ICOCAの使用可）</span>
+            <table class="simple-timetable">
+                <caption>鳥取駅 ～ 松原</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">鳥取駅 発</th>
+                        <th scope="col">松原 着</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>12:10</td>
+                        <td>12:31</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
 </section>
 
     </div>
