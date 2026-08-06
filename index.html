@@ -119,6 +119,70 @@
             margin-top: 1.5rem;
         }
 
+        .speaker-list-heading {
+            margin-bottom: 0.25rem;
+        }
+
+        .speaker-list-note {
+            margin-top: 0;
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        .speaker-sessions {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            align-items: start;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .speaker-session {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.25rem;
+            background-color: #f8fafc;
+        }
+
+        .speaker-session.night-session {
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .speaker-session.day-session {
+            border-top: 4px solid var(--accent-color);
+        }
+
+        .speaker-session h4 {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin: 0 0 0.75rem;
+        }
+
+        .speaker-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .speaker-list li {
+            padding: 0.6rem 0;
+            margin: 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .speaker-list li:last-child {
+            border-bottom: none;
+        }
+
+        .speaker-name {
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .speaker-affiliation {
+            color: #4a5568;
+        }
+
         ul {
             padding-left: 1.5rem;
         }
@@ -192,6 +256,9 @@
                 padding-top: 0.25rem;
                 padding-bottom: 0.75rem;
             }
+            .speaker-sessions {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -219,6 +286,8 @@
             <div class="notice-banner">
           <h3>📢 最新のお知らせ</h3>
           <ul>
+            <li><strong>2026.08.06:</strong> <br>
+                <a href="#program">招待講演者一覧</a>を公開しました！<br></li>
             <li><strong>2026.08.03:</strong> <br>
                 超伝導などの強相関材料の会合であるSCF2026の参加申込を開始しました！
                 申込は<a href="https://forms.gle/5hMa2cSq5oeAjUT87" target="_blank">こちら</a>から行えます。<br></li>
@@ -284,7 +353,34 @@
             <p>招待講演者によるナイトセッション，口頭発表を予定しています。</p>
             <p>※学生の発表は原則ポスターセッションとなります。</p>
             <p>プログラムの詳細は、確定次第、本ウェブサイトにてご案内いたします。</p>
-            <p>初日のセッション開始は、2026年10月23日(金) 13:00を予定しています。</p>
+            <p>初日のセッション開始は、2026年10月23日(金) 13:30を予定しています。</p>
+
+            <h3 class="speaker-list-heading">招待講演者一覧</h3>
+            <p class="speaker-list-note">（敬称略）順次更新</p>
+            <div class="speaker-sessions">
+                <div class="speaker-session night-session">
+                    <h4>ナイトセッション</h4>
+                    <ul class="speaker-list">
+                        <li><span class="speaker-name">野村悠祐</span> <span class="speaker-affiliation">（東北大学 金属材料研究所）</span></li>
+                        <li><span class="speaker-name">田中将嗣</span> <span class="speaker-affiliation">（九州工業大学）</span></li>
+                    </ul>
+                </div>
+                <div class="speaker-session day-session">
+                    <h4>デイセッション</h4>
+                    <ul class="speaker-list">
+                        <li><span class="speaker-name">高野義彦</span> <span class="speaker-affiliation">（物質材料研究機構・筑波大学）</span></li>
+                        <li><span class="speaker-name">黒木和彦</span> <span class="speaker-affiliation">（大阪大学）</span></li>
+                        <li><span class="speaker-name">北川俊作</span> <span class="speaker-affiliation">（京都大学）</span></li>
+                        <li><span class="speaker-name">桜井裕也</span> <span class="speaker-affiliation">（物質材料研究機構）</span></li>
+                        <li><span class="speaker-name">長尾雅則</span> <span class="speaker-affiliation">（山梨大学 クリスタル科学研究センター）</span></li>
+                        <li><span class="speaker-name">明石遼介</span> <span class="speaker-affiliation">（慶応大学）</span></li>
+                        <li><span class="speaker-name">小幡正雄</span> <span class="speaker-affiliation">（金沢大学）</span></li>
+                        <li><span class="speaker-name">長田礎　</span> <span class="speaker-affiliation">（東京大学）</span></li>
+                        <li><span class="speaker-name">松本凌　</span> <span class="speaker-affiliation">（物質材料研究機構）</span></li>
+                        <li><span class="speaker-name">井戸康太</span> <span class="speaker-affiliation">（山口大学）</span></li>
+                    </ul>
+                </div>
+            </div>
         </section>
 
         <section id="registration">
@@ -339,7 +435,7 @@
                 <tr>-->
                     <th>連絡先</th>
                     <td><a href="mailto:m26j3033k@edu.tottori-u.ac.jp">鳥取大学工学部　西佑恭（実行委員）</a><br>
-                    <a href="mailto:sakakibara@tottori-u.ac.jp">鳥取大学工学部　榊原寛史（監督委員）</a></td>
+                    <a href="mailto:sakakibara@tottori-u.ac.jp">鳥取大学工学部　榊原寛史（監督委員）</a> sakakibara[at]tottori-u.ac.jp</td>
                 </tr>
             </table>
         </section>
