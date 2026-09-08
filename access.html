@@ -259,6 +259,7 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="mobile-navigation.css">
 </head>
 <body>
 
@@ -267,8 +268,12 @@
         <p>中四国超伝導委員会 (TSC)</p>
     </header>
 
-    <nav>
-        <ul>
+    <nav aria-label="メインナビゲーション">
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+            <span class="nav-toggle-label">メニュー</span>
+            <span class="nav-toggle-icon" aria-hidden="true">☰</span>
+        </button>
+        <ul id="nav-links">
             <li><a href="index.html">トップページへ戻る</a></li>
             <li><a href="#access-detail">会場詳細</a></li>
             <li><a href="#from-airport">鳥取空港からお越しの方</a></li>
@@ -318,5 +323,6 @@
         <p>&copy; 2026 中四国超伝導委員会 (TSC). All Rights Reserved.</p>
     </footer>
 
+    <script src="mobile-navigation.js"></script>
 </body>
 </html>
