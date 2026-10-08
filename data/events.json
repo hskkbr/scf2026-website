@@ -1,0 +1,29 @@
+[
+  {
+    "id": "EV01", "type": "event", "name": "Meet the KIRINJISHI！ in 鳥取砂丘", "venueRef": "B", "date": "2026-10-24",
+    "sessions": [{"start": "11:00", "scfAvailable": false}, {"start": "13:30", "scfAvailable": true}],
+    "scfEventHours": "13:30〜", "price": "観覧無料",
+    "description": "鳥取・因幡地方などに伝わる伝統芸能「麒麟獅子舞」を鳥取砂丘で披露します。麒麟獅子とのふれあいも楽しめます。",
+    "notices": ["SCFの砂丘観光時間内では13:30の回を観覧できます", "アンケート回答者には先着でプレゼントがあります"],
+    "weatherPolicy": null, "reservation": "不要", "takeHomeAllowed": null,
+    "eventUrl": "https://www.torican.jp/festival/detail_3188.html", "lastVerified": "2026-10-08", "status": "verified"
+  },
+  {
+    "id": "EV02", "type": "event", "name": "みんなでつくろうハロウィン砂像", "venueRef": "C", "date": "2026-10-24",
+    "sessions": [{"start": "10:00", "end": "11:30", "scfAvailable": false}, {"start": "13:30", "end": "15:00", "scfAvailable": true}],
+    "scfEventHours": "13:30〜14:30", "price": "公式案内に記載なし",
+    "description": "巨大な「ジャック・オー・ランタン」の砂像を、参加者みんなで制作する10月24日限定のハロウィンイベントです。完成した砂像は10月31日まで展示されます。",
+    "notices": ["SCFの砂丘観光時間内では午後の部に参加できます", "参加方法や最新の開催情報は公式案内をご確認ください"],
+    "weatherPolicy": "公式案内に記載なし", "reservation": "公式案内に記載なし", "takeHomeAllowed": null,
+    "eventUrl": "https://www.pref.tottori.lg.jp/tottorihalloween2026/", "lastVerified": "2026-10-08", "status": "verified"
+  },
+  {
+    "id": "EV03", "type": "event", "name": "ミニ砂像体験［砂美ワークショップ2026］", "venueRef": "C", "date": "2026-10-24",
+    "sessions": [{"start": "13:30", "end": "15:30", "scfAvailable": true}],
+    "lastEntry": "15:00", "scfEventHours": "13:30〜14:30", "price": "1体500円（道具レンタル込み）＋砂の美術館入館券",
+    "description": "高さ約20cmのミニ砂像を自分で制作できる体験ワークショップです。制作時間の目安は約30〜40分です。",
+    "notices": ["雨天中止", "制作した砂像は持ち帰れません", "当日受付・先着順", "会場定員10組", "制作時間は約30〜40分", "参加費とは別に砂の美術館の入館券が必要です", "混雑時は待ち時間が発生する場合があります"],
+    "weatherPolicy": "雨天中止", "reservation": "当日受付・先着順", "capacity": "10組", "duration": "約30〜40分", "takeHomeAllowed": false,
+    "eventUrl": "https://www.sand-museum.jp/news/sazou_taiken2026/", "lastVerified": "2026-10-08", "status": "verified"
+  }
+]
