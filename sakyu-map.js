@@ -273,7 +273,12 @@
             zoomAnimation: !reducedMotion.matches, fadeAnimation: !reducedMotion.matches, markerZoomAnimation: !reducedMotion.matches });
         L.control.zoom({ zoomInTitle: '地図を拡大', zoomOutTitle: '地図を縮小' }).addTo(map);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            detectRetina: true,
+            // Leaflet 1.9.4 halves tileSize and adds 1 to URL zoom on Retina.
+            // Keep map zoom 19 available without requesting OSM tiles above z19.
+            maxZoom: L.Browser.retina ? 20 : 19,
+            maxNativeZoom: L.Browser.retina ? 18 : 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).on('tileerror', () => {
             $('map-error').textContent = '地図画像を読み込めない部分があります。リスト表示やGoogle Mapsもご利用いただけます。';
             $('map-error').hidden = false;

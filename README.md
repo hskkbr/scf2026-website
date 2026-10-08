@@ -29,6 +29,7 @@ SCF2026 (Superconductors and Correlated materials Forum in 2026) の公式ウェ
 
 - `venueRef` でイベントを会場スポットに紐付けます。イベント専用ピンは作成しません。
 - `officialUrl: null` は公式サイトボタンを非表示にします。
+- `googleMapsUrl` は名称＋地域名の検索URLです。15 砂丘コーヒーは名称・施設名を添えても複数候補になり、D 砂丘観光リフトは両側の駅が候補になるため、この2地点は座標URLを維持しています。Leafletの配置用座標とは独立して管理します。
 - `status` は運営用で、参加者向け画面には表示しません。
 - フッターの最終確認日は全データの `lastVerified` の最大値です。
 - `sessions` は実際の開催時間、`scfEventHours` はSCF観光時間内に参加可能な時間として別々に表示します。
@@ -42,6 +43,7 @@ SCF2026 (Superconductors and Correlated materials Forum in 2026) の公式ウェ
 - [Leaflet.markercluster 1.5.3](https://github.com/Leaflet/Leaflet.markercluster) — MIT、`vendor/leaflet.markercluster/MIT-LICENCE.txt`
 - 取得元: `https://unpkg.com/leaflet@1.9.4/`、`https://unpkg.com/leaflet.markercluster@1.5.3/`
 - 地図タイル: `https://tile.openstreetmap.org/{z}/{x}/{y}.png`。帰属表示を常時表示し、[OSMタイル利用方針](https://operations.osmfoundation.org/policies/tiles/)に沿って通常のブラウザキャッシュを利用します。先読み・一括取得・オフライン保存は行いません。地図画像の表示にはインターネット接続が必要です。
+- 高DPIでは `detectRetina` により1段階上のズームの256pxタイルを128 CSS pxで表示します。Leaflet 1.9.4のズーム補正を考慮して `maxZoom` / `maxNativeZoom` を設定し、地図の最大ズーム19を維持しつつ、OSMへの要求はz19までに制限しています。最大ズームでは元画像の解像度上限があります。
 
 ### ローカル確認
 
@@ -64,6 +66,7 @@ python3 -m venv /tmp/scf-map-test-env
 ```
 
 `SCF_SCREENSHOT_DIR=/tmp/scf-map-screenshots` を指定すると画面画像も保存します。テストは一時HTTPサーバーを起動し、GitHub Pagesと同じプロジェクト配下のパスで確認します。21地点・3イベント、カテゴリ、状態共有、同一座標のSpiderfy、ボトムシート、キーボード操作、イベント詳細、リンク、360/390/430/768/1024/1440px幅と既存ナビゲーションを検証します。
+`SCF_DEVICE_SCALE_FACTOR=2` を指定すると同じテストをRetina相当で実行できます。タイルの画素密度、最大ズームでの表示、配信上限を超えるタイル要求がないこと、座標に対するマーカー位置も検証します。
 
 ### 公開前の確認事項
 

@@ -1,6 +1,7 @@
 """Browser acceptance checks. Requires Python + playwright and installed Google Chrome.
 Run: python -m unittest discover -s tests -v
 Optional: SCF_SCREENSHOT_DIR=/tmp/scf-map-screenshots
+Optional: SCF_DEVICE_SCALE_FACTOR=2 for Retina acceptance checks
 The server uses a project subpath to exercise GitHub Pages relative URLs.
 """
 import functools
@@ -46,7 +47,8 @@ class SakyuMapTests(unittest.TestCase):
         cls.server.server_close()
 
     def setUp(self):
-        self.context = self.browser.new_context(viewport={'width':390, 'height':844}, reduced_motion='reduce')
+        self.context = self.browser.new_context(viewport={'width':390, 'height':844}, reduced_motion='reduce',
+                                               device_scale_factor=float(os.environ.get('SCF_DEVICE_SCALE_FACTOR', '1')))
         self.page = self.context.new_page()
         self.errors = []
         self.page.on('pageerror', lambda error: self.errors.append(str(error)))
@@ -220,6 +222,56 @@ class SakyuMapTests(unittest.TestCase):
         self.assertGreater(self.page.locator('.spot-marker').count(), 1)
         for marker in self.page.locator('.spot-marker').all():
             expect(marker).to_have_attribute('aria-label', re.compile('飲食店|観光'))
+
+    def test_07_retina_tiles_and_zoom_limits(self):
+        # Capture the map only in this test, without exposing application internals in production.
+        script = "L.Map.addInitHook(function () { window.testMap = this; });\n" + (ROOT / 'sakyu-map.js').read_text()
+        self.page.route('**/sakyu-map.js', lambda route: route.fulfill(content_type='text/javascript', body=script))
+        tile_zooms = []
+        self.page.on('request', lambda request: tile_zooms.append(int(request.url.split('/')[3]))
+                     if request.url.startswith('https://tile.openstreetmap.org/') else None)
+        self.page.reload()
+        expect(self.page.locator('#map-controls')).to_be_enabled()
+        self.click_filter('event')
+        self.page.evaluate('testMap.setView([35.544033, 134.236629], 17, {animate: false})')
+        retina = self.page.evaluate('devicePixelRatio > 1')
+        for zoom, action in [(17, None), (18, 'in'), (19, 'in'), (18, 'out'), (17, 'out')]:
+            if action:
+                self.page.locator(f'.leaflet-control-zoom-{action}').click()
+            self.page.wait_for_function('expected => testMap.getZoom() === expected', arg=zoom)
+            self.page.wait_for_function("""() => {
+                let ready = false;
+                testMap.eachLayer(layer => {
+                    if (layer instanceof L.TileLayer) ready = !layer.isLoading();
+                });
+                return ready && !!document.querySelector('.leaflet-tile-loaded');
+            }""")
+            expect(self.page.locator('#map-error')).to_be_hidden()
+            self.assertTrue(tile_zooms)
+            self.assertLessEqual(max(tile_zooms), 19)
+            tiles = self.page.locator('.leaflet-tile-loaded').evaluate_all("""nodes => nodes.map(node => ({
+                native: node.naturalWidth, width: node.getBoundingClientRect().width,
+                height: node.getBoundingClientRect().height,
+                zoom: Number(new URL(node.src).pathname.split('/')[1])
+            }))""")
+            current = [tile for tile in tiles if tile['zoom'] == min(zoom + int(retina), 19)]
+            self.assertTrue(current, f'No tiles at map zoom {zoom}')
+            for tile in current:
+                self.assertEqual(tile['native'], 256)
+                expected_size = 128 if retina and zoom < 19 else 256
+                self.assertAlmostEqual(tile['width'], expected_size, delta=0.1)
+                self.assertAlmostEqual(tile['height'], expected_size, delta=0.1)
+            # The B marker remains anchored to its original geographic coordinate at every zoom.
+            offset = self.page.evaluate("""() => {
+                const map = document.getElementById('sakyu-map').getBoundingClientRect();
+                const marker = document.querySelector('.spot-marker[title^="B "]').getBoundingClientRect();
+                const expected = testMap.latLngToContainerPoint([35.544033, 134.236629]);
+                return [marker.x + marker.width / 2 - map.x - expected.x,
+                        marker.y + marker.height / 2 - map.y - expected.y];
+            }""")
+            self.assertTrue(all(abs(value) <= 1 for value in offset), offset)
+        if retina:
+            self.screenshot('retina-map.png')
 
 
 if __name__ == '__main__':
