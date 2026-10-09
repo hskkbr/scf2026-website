@@ -213,6 +213,11 @@
 .spot-id { flex: none; display: inline-block; font-size: .95rem; font-weight: bold; color: white; padding: .15rem .5rem; border-radius: 4px; }
 .event-id { background: var(--primary-color); }
 .row-meta { color: var(--muted-color); font-size: .95rem; margin: .25rem 0; }
+.scf-hours { color: var(--primary-color); font-weight: bold; background: var(--bg-color); border-left: 2px solid var(--secondary-color); border-radius: 4px; }
+p.scf-hours { display: flex; align-items: baseline; flex-wrap: wrap; gap: .2rem .6rem; margin: .4rem 0; padding: .35rem .5rem; font-size: .95rem; }
+.scf-hours-label, .time-range { white-space: nowrap; }
+.scf-hours-service { display: block; }
+.early-closing-notice { color: var(--primary-color); font-size: .9rem; font-weight: bold; margin: .3rem 0; }
 .row-summary { margin: .4rem 0; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
 .badges { display: flex; flex-wrap: wrap; gap: .35rem; align-items: center; margin: .5rem 0; }
 .category-badge, .halloween-badge, .event-badge { display: inline-block; border-radius: 4px; padding: .15rem .45rem; font-size: .8rem; font-weight: bold; }
@@ -226,6 +231,7 @@
 .detail-description { margin: .5rem 0 1rem; }
 .detail-facts { margin: .5rem 0 1rem; }
 .detail-facts > div { display: grid; grid-template-columns: 7.5em minmax(0, 1fr); border-bottom: 1px solid var(--border-color); padding: .65rem 0; gap: .5rem; }
+.detail-facts > .scf-hours { padding-inline: .5rem; }
 .detail-facts dt { color: var(--primary-color); font-weight: bold; }
 .detail-facts dd { margin: 0; }
 .detail-notices { background: var(--sand-color); border-left: 4px solid #976227; border-radius: 4px; padding: .85rem; margin: 1rem 0; }

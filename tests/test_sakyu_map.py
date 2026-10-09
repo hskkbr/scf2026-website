@@ -274,5 +274,97 @@ class SakyuMapTests(unittest.TestCase):
             self.screenshot('retina-map.png')
 
 
+    def test_08_scf_hours_and_early_closing_notices(self):
+        self.click_view('list')
+        expected = {'01': 'レストラン営業は14:00まで', '02': 'レストラン営業は14:00まで',
+                    '06': 'L.O.13:30', '07': '料理L.O.14:00'}
+        for spot in SPOTS:
+            row = self.row(spot['id'])
+            expect(row.locator('> .scf-hours')).to_contain_text('SCF時間内')
+            expect(row.locator('> .early-closing-notice')).to_have_count(int(spot['id'] in expected))
+            if spot['id'] in expected:
+                expect(row.locator('> .early-closing-notice')).to_have_text('⚠ ' + expected[spot['id']])
+        for width in [360, 390, 430, 1440]:
+            self.page.set_viewport_size({'width': width, 'height': 900})
+            self.assert_no_overflow()
+            for sid in expected:
+                row = self.row(sid)
+                # Every time range occupies a single line, including split food/cafe hours.
+                self.assertTrue(row.locator('> .scf-hours .time-range').evaluate_all(
+                    '(nodes) => nodes.every(n => n.getClientRects().length === 1)'))
+                row.locator('> .detail-toggle').click()
+                expect(row.locator('.detail-facts > .scf-hours')).to_contain_text('SCF時間内')
+                spot = next(s for s in SPOTS if s['id'] == sid)
+                expect(row.locator('.detail-facts')).to_contain_text(spot['hours'])
+                for notice in spot['notices']:
+                    expect(row.locator('.detail-notices')).to_contain_text(notice)
+                self.assert_no_overflow()
+                row.locator('> .detail-toggle').click()
+            self.screenshot(f'scf-hours-list-{width}.png')
+        self.page.set_viewport_size({'width':360, 'height':800})
+        self.row('06').locator('> .detail-toggle').click()
+        self.row('06').get_by_role('button', name='地図で見る', exact=True).click()
+        expect(self.page.locator('.leaflet-popup .scf-hours')).to_contain_text('SCF時間内')
+        expect(self.page.locator('.leaflet-popup .scf-hours')).to_contain_text('11:30–13:30')
+        self.page.locator('.leaflet-popup button').click()
+        expect(self.page.locator('#detail-sheet .detail-facts > .scf-hours')).to_contain_text('11:30–13:30')
+        self.assert_no_overflow()
+        self.page.keyboard.press('Escape')
+        expect(self.page.locator('.leaflet-popup button')).to_be_focused()
+
+    def test_09_fit_respects_current_filter(self):
+        script = "L.Map.addInitHook(function () { window.testMap = this; });\n" + (ROOT / 'sakyu-map.js').read_text()
+        self.page.route('**/sakyu-map.js', lambda route: route.fulfill(content_type='text/javascript', body=script))
+        self.page.reload()
+        expect(self.page.locator('#map-controls')).to_be_enabled()
+        for category in ['all', 'food', 'sightseeing', 'event']:
+            self.click_filter(category)
+            self.page.evaluate('testMap.setView([35.5,134.2],19,{animate:false})')
+            self.page.get_by_role('button', name='全地点を表示', exact=True).click()
+            expected = [s for s in SPOTS if category=='all' or s['type']==category or
+                        (category=='event' and s['id'] in ['B','C'])]
+            coords = [[s['location']['latitude'], s['location']['longitude']] for s in expected]
+            self.assertTrue(self.page.evaluate('(points)=>points.every(p=>testMap.getBounds().contains(p))', coords))
+            expect(self.page.locator(f'[data-filter="{category}"]')).to_have_attribute('aria-pressed','true')
+            if category in ['food','event']:
+                self.assertFalse(self.page.evaluate('testMap.getBounds().contains([35.545417,134.230583])'))
+        self.click_filter('food')
+        self.page.locator('[data-category="軽食・テイクアウト"]').click()
+        self.page.get_by_role('button', name='全地点を表示', exact=True).click()
+        expect(self.page.locator('[data-category="軽食・テイクアウト"]')).to_have_attribute('aria-pressed','true')
+        self.assertFalse(self.page.evaluate('testMap.getBounds().contains([35.544626,134.237837])'))
+
+    def test_10_external_links_open_separate_tabs(self):
+        self.click_view('list')
+        # Render all details, including event links, then check every external link on this page.
+        for row in self.page.locator('#list-panel > article').all():
+            row.locator('> .detail-toggle').click()
+        for link in self.page.locator('a[href^="https://"], a[href^="http://"]').all():
+            expect(link).to_have_attribute('target','_blank')
+            expect(link).to_have_attribute('rel','noopener noreferrer')
+            expect(link).to_have_attribute('aria-label', re.compile('新しいタブで開く'))
+        original_url = self.page.url
+        for sid, label in [('09','Google Mapsで開く'), ('09','公式サイト'), ('EV03','イベント詳細を見る')]:
+            link = self.row(sid).get_by_role('link', name=label+'（新しいタブで開く）',exact=True)
+            url = link.get_attribute('href')
+            # Isolate tab behavior from external services; preserve the actual outgoing URL.
+            self.context.route(url, lambda route: route.fulfill(content_type='text/html',body='<title>External destination</title>'))
+            with self.page.expect_popup() as info:
+                link.click()
+            popup = info.value
+            popup.wait_for_load_state()
+            self.assertEqual(popup.url, url)
+            self.assertTrue(popup.evaluate('window.opener === null'))
+            self.assertEqual(popup.evaluate('document.referrer'), '')
+            self.assertEqual(self.page.url, original_url)
+            popup.close()
+        self.row('09').get_by_role('button',name='地図で見る',exact=True).click()
+        self.assertEqual(len(self.context.pages),1)
+        expect(self.page.locator('#map-panel')).to_be_visible()
+        self.assertEqual(self.page.url,original_url)
+        for link in self.page.locator('#nav-links a').all():
+            self.assertIsNone(link.get_attribute('target'))
+
+
 if __name__ == '__main__':
     unittest.main()

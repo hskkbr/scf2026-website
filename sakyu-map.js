@@ -26,16 +26,46 @@
     function externalLink(text, url, secondary = false) {
         const link = el('a', `btn${secondary ? ' btn-secondary' : ''}`, text);
         link.href = url;
+        markExternalLink(link);
+        return link;
+    }
+    function markExternalLink(link) {
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
-        link.setAttribute('aria-label', `${text}（新しいタブで開く）`);
-        return link;
+        link.setAttribute('aria-label', `${link.textContent}（新しいタブで開く）`);
     }
     const venueFor = (event) => spots.find((spot) => spot.id === event.venueRef);
     const eventsFor = (spot) => events.filter((event) => event.venueRef === spot.id);
     const sessionTime = (session) => `${session.start}〜${session.end || ''}`;
     const sessionsText = (event, availableOnly = false) => event.sessions
         .filter((session) => !availableOnly || session.scfAvailable).map(sessionTime).join('／');
+
+    function scfHoursValue(value) {
+        const content = el('span', 'scf-hours-value');
+        // Keep each service on its own line and never break a time range midway.
+        value.split('／').forEach((part) => {
+            const line = el('span', 'scf-hours-service');
+            part.split(/(\d{1,2}:\d{2}[–〜-]\d{1,2}:\d{2})/).forEach((text, index) => {
+                line.append(index % 2 ? el('span', 'time-range', text) : document.createTextNode(text));
+            });
+            content.append(line);
+        });
+        return content;
+    }
+    function scfHours(value) {
+        const row = el('p', 'scf-hours');
+        row.append(el('span', 'scf-hours-label', 'SCF時間内'), scfHoursValue(value));
+        return row;
+    }
+    function earlyClosingNotice(spot) {
+        if (spot.type !== 'food') return null;
+        // Only quote explicit closing / last-order notices before the 14:30 SCF end.
+        // Do not infer deadlines from general warnings, limited stock or opening times.
+        return spot.notices.find((notice) => {
+            const time = notice.match(/(?:L\.O\.|営業は)(\d{1,2}):(\d{2})/);
+            return time && Number(time[1]) * 60 + Number(time[2]) < 14 * 60 + 30;
+        });
+    }
 
     function heading(item, tag = 'h3') {
         const node = el(tag, 'row-heading');
@@ -52,8 +82,11 @@
     function facts(entries) {
         const dl = el('dl', 'detail-facts');
         entries.filter(([, value]) => value !== undefined && value !== null).forEach(([label, value]) => {
-            const row = el('div');
-            row.append(el('dt', '', label), el('dd', '', value));
+            const isScfHours = label === 'SCF時間内';
+            const row = el('div', isScfHours ? 'scf-hours' : '');
+            const description = el('dd');
+            description.append(isScfHours ? scfHoursValue(value) : document.createTextNode(value));
+            row.append(el('dt', '', label), description);
             dl.append(row);
         });
         return dl;
@@ -120,10 +153,12 @@
             const venue = venueFor(item);
             row.append(el('p', 'row-meta', `${venue.id} ${venue.name}`));
             row.append(el('p', 'row-meta', `開催時間 ${sessionsText(item, true)}`));
-            row.append(el('p', 'row-meta', `SCF時間内 ${item.scfEventHours}`));
+            row.append(scfHours(item.scfEventHours));
         } else {
             row.append(badges(item));
-            row.append(el('p', 'row-meta', `SCF時間内 ${item.eventHours}`));
+            row.append(scfHours(item.eventHours));
+            const closingNotice = earlyClosingNotice(item);
+            if (closingNotice) row.append(el('p', 'early-closing-notice', `⚠ ${closingNotice}`));
         }
         row.append(el('p', 'row-meta', item.price));
         row.append(el('p', 'row-summary', item.description));
@@ -244,7 +279,7 @@
         const content = el('div');
         content.append(el('strong', 'popup-title', `${spot.id} ${spot.name}`));
         content.append(el('p', '', spot.categories.join('・')));
-        content.append(el('p', '', spot.eventHours));
+        content.append(scfHours(spot.eventHours));
         const more = button('詳細を見る', () => openSheet(spot, more));
         more.setAttribute('aria-label', `${spot.id} ${spot.name}の詳細を見る`);
         content.append(more);
@@ -271,6 +306,10 @@
         }
         map = L.map('sakyu-map', { maxZoom: 19, minZoom: 12, zoomControl: false,
             zoomAnimation: !reducedMotion.matches, fadeAnimation: !reducedMotion.matches, markerZoomAnimation: !reducedMotion.matches });
+        // Leaflet rebuilds attribution when layers change; preserve its text and links.
+        map.on('layeradd layerremove', () => {
+            map.attributionControl.getContainer().querySelectorAll('a[href]').forEach(markExternalLink);
+        });
         L.control.zoom({ zoomInTitle: '地図を拡大', zoomOutTitle: '地図を縮小' }).addTo(map);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             detectRetina: true,
