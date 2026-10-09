@@ -17,7 +17,7 @@ SCF2026 (Superconductors and Correlated materials Forum in 2026) の公式ウェ
 ## 鳥取砂丘 Lunch & Sightseeing Map
 
 - ページ: `sakyu-map.html`（公開想定パス: `/scf2026-website/sakyu-map.html`）
-- トップページのナビゲーションとプログラム欄から移動できます。
+- トップページのナビゲーションから移動できます。
 - 従来どおり静的HTML/CSS/JavaScriptで動作します。ビルド・APIキー・サーバー側処理は不要です。
 - `sakyu-map.css` は既存の `poster.html` の基本レイアウト・テーマ変数・フォントを再利用した新ページ専用CSSです。既存ページのCSSや共通モバイルメニューは変更していません。
 - 表示方法とフィルターは同じ状態を共有します。「すべて」のリストは21地点と独立したイベント一覧、イベントの地図は会場B・Cの2地点を表示します。

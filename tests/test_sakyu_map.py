@@ -212,7 +212,8 @@ class SakyuMapTests(unittest.TestCase):
             self.page.keyboard.press('Escape')
             expect(self.page.locator('#nav-links')).not_to_be_visible()
         self.page.goto(self.base + 'index.html')
-        expect(self.page.locator('a[href="sakyu-map.html"]')).to_have_count(2)
+        expect(self.page.locator('#nav-links a[href="sakyu-map.html"]')).to_have_count(1)
+        expect(self.page.locator('#program a[href="sakyu-map.html"]')).to_have_count(0)
 
     def test_06_cluster_keyboard_and_spiderfy(self):
         cluster = self.page.locator('.cluster-marker').first
