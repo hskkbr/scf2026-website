@@ -1,0 +1,189 @@
+[
+  {
+    "id": "01", "type": "food", "name": "砂丘会館",
+    "categories": ["食事", "お土産"],
+    "description": "海鮮丼や鳥取和牛、牛骨ラーメンなど、鳥取らしいメニューを幅広く楽しめるレストランです。",
+    "hours": "レストラン 11:00–14:00／売店 9:00–17:00",
+    "eventHours": "食事 11:30–14:00／売店 11:30–14:30", "price": "650〜2,800円程度",
+    "notices": ["レストラン営業は14:00まで", "売店は17:00まで営業"], "halloween": true,
+    "location": {"latitude": 35.543773, "longitude": 134.237470},
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=%E7%A0%82%E4%B8%98%E4%BC%9A%E9%A4%A8%20%E9%B3%A5%E5%8F%96%E7%9C%8C%E9%B3%A5%E5%8F%96%E5%B8%82",
+    "officialUrl": "https://sakyu.gr.jp/", "lastVerified": "2026-10-08", "status": "verified"
+  },
+  {
+    "id": "02", "type": "food", "name": "砂丘センター 見晴らしの丘",
+    "categories": ["食事", "お土産"],
+    "description": "鳥取砂丘を眺めながら食事ができるレストラン。海鮮丼をはじめ、定食・麺類・丼物など幅広いメニューがあります。",
+    "hours": "レストラン 11:00–14:00", "eventHours": "11:30–14:00", "price": "1,000〜2,000円程度",
+    "notices": ["レストラン営業は14:00まで", "営業時間が変更される場合があります"], "halloween": true,
+    "location": {"latitude": 35.541440, "longitude": 134.238906},
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=%E7%A0%82%E4%B8%98%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC%20%E8%A6%8B%E6%99%B4%E3%82%89%E3%81%97%E3%81%AE%E4%B8%98%20%E9%B3%A5%E5%8F%96",
+    "officialUrl": "https://www.tottorisakyu.com/", "lastVerified": "2026-10-08", "status": "verified"
+  },
+  {
+    "id": "03", "type": "food", "name": "らくだや", "categories": ["カフェ・スイーツ", "お土産"],
+    "description": "砂丘入口そばのお土産店。鳥取名物の梨を使った梨ソフトクリームなどを気軽に楽しめます。",
+    "hours": "9:00–17:00", "eventHours": "11:30–14:30", "price": "〜1,000円程度", "notices": [], "halloween": true,
+    "location": {"latitude": 35.542942, "longitude": 134.237043},
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=%E3%82%89%E3%81%8F%E3%81%A0%E3%82%84%20%E9%B3%A5%E5%8F%96%E7%A0%82%E4%B8%98",
+    "officialUrl": "https://rakudaya.info/", "lastVerified": "2026-10-08", "status": "verified"
+  },
+  {
+    "id": "04", "type": "food", "name": "スカット", "categories": ["食事"],
+    "description": "鳥取牛のビーフカレーや猛者海老のクリームパスタなど、鳥取の食材を使った料理を楽しめるカフェレストランです。",
+    "hours": "8:30–17:00（L.O.16:30）", "eventHours": "11:30–14:30", "price": "1,000〜2,000円程度", "notices": [], "halloween": false,
+    "location": {"latitude": 35.542623, "longitude": 134.236866},
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=%E3%82%B9%E3%82%AB%E3%83%83%E3%83%88%20%E9%B3%A5%E5%8F%96%E7%A0%82%E4%B8%98",
+    "officialUrl": "https://sukatto-tottori.com/", "lastVerified": "2026-10-08", "status": "recheck"
+  },
+  {
+    "id": "05", "type": "food", "name": "ジェラート専門店さんこうえん", "categories": ["カフェ・スイーツ", "お土産"],
+    "description": "鳥取の梨を使った「梨の実ジェラート」をはじめ、さまざまな種類のジェラートを楽しめる専門店です。",
+    "hours": "10:30–18:00", "eventHours": "11:30–14:30", "price": "500〜1,500円程度",
+    "notices": ["季節により営業時間が変更される場合があります", "不定休"], "halloween": false,
+    "location": {"latitude": 35.542088, "longitude": 134.236717},
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=%E3%82%B8%E3%82%A7%E3%83%A9%E3%83%BC%E3%83%88%E5%B0%82%E9%96%80%E5%BA%97%E3%81%95%E3%82%93%E3%81%93%E3%81%86%E3%81%88%E3%82%93%20%E9%B3%A5%E5%8F%96%E7%A0%82%E4%B8%98",
+    "officialUrl": "https://www.sankouen.com/shop/", "lastVerified": "2026-10-08", "status": "recheck"
+  },
+  {
+    "id": "06", "type": "food", "name": "海鮮丼 鯛喜", "categories": ["食事"],
+    "description": "旬の魚介をたっぷり使った海鮮丼が人気の専門店。砂丘周辺で海鮮を楽しみたい人におすすめです。",
+    "hours": "10:00–14:00（L.O.13:30）", "eventHours": "11:30–13:30", "price": "1,000〜2,000円程度",
+    "notices": ["L.O.13:30", "1日50食限定", "売り切れや予約で完売する場合があります"], "halloween": false,
+    "location": {"latitude": 35.542167, "longitude": 134.236735},
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=%E6%B5%B7%E9%AE%AE%E4%B8%BC%20%E9%AF%9B%E5%96%9C%20%E9%B3%A5%E5%8F%96%E7%A0%82%E4%B8%98",
+    "officialUrl": null, "lastVerified": "2026-10-08", "status": "recheck"
+  },
+  {
+    "id": "07", "type": "food", "name": "砂丘の家レイガーデン", "categories": ["食事", "カフェ・スイーツ"],
+    "description": "鳥取県産の旬の食材を使ったランチを楽しめる、ガーデン付きのカフェレストランです。デザートやカフェ利用もできます。",
+    "hours": "土日祝 11:00–17:00（料理L.O.14:00／ドリンクL.O.16:30）",
+    "eventHours": "食事 11:30–14:00／カフェ 11:30–14:30", "price": "1,000〜2,000円程度",
+    "notices": ["料理L.O.14:00", "貸切等により休業する場合があります"], "halloween": true,
+    "location": {"latitude": 35.544626, "longitude": 134.237837},
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=%E7%A0%82%E4%B8%98%E3%81%AE%E5%AE%B6%E3%83%AC%E3%82%A4%E3%82%AC%E3%83%BC%E3%83%87%E3%83%B3%20%E9%B3%A5%E5%8F%96",
+    "officialUrl": "https://www.raygarden.jp/cafe/", "lastVerified": "2026-10-08", "status": "recheck"
+  },
+  {
+    "id": "08", "type": "food", "name": "村上水産 鳥取大砂丘店", "categories": ["食事"],
+    "description": "鮮魚仲買人直営のお店で、日本海の魚介を使った海鮮丼や定食を楽しめます。",
+    "hours": "11:00–16:00（L.O.15:30）", "eventHours": "11:30–14:30", "price": "2,000〜3,000円程度",
+    "notices": ["予約不可・先着順"], "halloween": false,
+    "location": {"latitude": 35.540690, "longitude": 134.236875},
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=%E6%9D%91%E4%B8%8A%E6%B0%B4%E7%94%A3%20%E9%B3%A5%E5%8F%96%E5%A4%A7%E7%A0%82%E4%B8%98%E5%BA%97%20%E9%B3%A5%E5%8F%96%E7%9C%8C%E9%B3%A5%E5%8F%96%E5%B8%82",
+    "officialUrl": "https://ginrin-grp.com/suisan/sakyu/", "lastVerified": "2026-10-08", "status": "verified"
+  },
+  {
+    "id": "09", "type": "food", "name": "Totto PURIN", "categories": ["カフェ・スイーツ", "お土産"],
+    "description": "鳥取砂丘の砂をイメージした粉末カラメルをかけて食べる「砂プリン」が人気のプリン専門店です。",
+    "hours": "土日祝 9:30–17:30", "eventHours": "11:30–14:30", "price": "500円前後〜", "notices": [], "halloween": false,
+    "location": {"latitude": 35.541883, "longitude": 134.236818},
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Totto%20PURIN%20%E9%B3%A5%E5%8F%96%E7%A0%82%E4%B8%98",
+    "officialUrl": "https://tottopurin.com/", "lastVerified": "2026-10-08", "status": "verified"
+  },
+  {
+    "id": "10", "type": "food", "name": "さんかく氷", "categories": ["カフェ・スイーツ"],
+    "description": "ふわふわの氷と自家製ソースを組み合わせたかき氷専門店。砂プリンをイメージしたかき氷なども楽しめます。",
+    "hours": "10:00–17:00（L.O.16:30）", "eventHours": "11:30–14:30", "price": "800〜1,500円程度",
+    "notices": ["L.O.16:30", "火・水曜定休"], "halloween": false,
+    "location": {"latitude": 35.541883, "longitude": 134.236818},
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=%E3%81%95%E3%82%93%E3%81%8B%E3%81%8F%E6%B0%B7%20%E9%B3%A5%E5%8F%96%E7%A0%82%E4%B8%98",
+    "officialUrl": "https://www.sankakugoori.com/", "lastVerified": "2026-10-08", "status": "verified"
+  },
+  {
+    "id": "11", "type": "food", "name": "SUGAR HIGH", "categories": ["食事"],
+    "description": "焼売や小籠包などの香港点心とお粥を組み合わせた点心ランチを楽しめるお店です。",
+    "hours": "土日祝 11:00–15:00", "eventHours": "11:30–14:30", "price": "1,000〜2,000円程度",
+    "notices": ["食材がなくなり次第終了する場合があります"], "halloween": false,
+    "location": {"latitude": 35.541900, "longitude": 134.236860},
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=SUGAR%20HIGH%20鳥取砂丘",
+    "officialUrl": null, "lastVerified": "2026-10-08", "status": "recheck"
+  },
+  {
+    "id": "12", "type": "food", "name": "タカハマカフェ", "categories": ["食事", "カフェ・スイーツ"],
+    "description": "隈研吾氏が設計した、鳥取県産材を多く使ったカフェ。食事やドリンクとともに屋上テラスからの景色も楽しめます。",
+    "hours": "10:00–17:00（L.O.16:30）", "eventHours": "11:30–14:30", "price": "500〜2,000円程度",
+    "notices": ["L.O.16:30"], "halloween": false,
+    "location": {"latitude": 35.543388, "longitude": 134.237299},
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=%E3%82%BF%E3%82%AB%E3%83%8F%E3%83%9E%E3%82%AB%E3%83%95%E3%82%A7%20%E9%B3%A5%E5%8F%96%E7%A0%82%E4%B8%98",
+    "officialUrl": "https://takahama-cafe.com/", "lastVerified": "2026-10-08", "status": "verified"
+  },
+  {
+    "id": "13", "type": "food", "name": "いずみおじさんのソフトクリーム", "categories": ["カフェ・スイーツ"],
+    "description": "鳥取県産の白バラ牛乳の生クリームを使った濃厚なソフトクリームが楽しめる砂丘限定のお店です。",
+    "hours": "9:00–16:30", "eventHours": "11:30–14:30", "price": "450〜650円程度", "notices": [], "halloween": false,
+    "location": {"latitude": 35.541449, "longitude": 134.236632},
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=%E3%81%84%E3%81%9A%E3%81%BF%E3%81%8A%E3%81%98%E3%81%95%E3%82%93%E3%81%AE%E3%82%BD%E3%83%95%E3%83%88%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%A0%20%E9%B3%A5%E5%8F%96%E7%A0%82%E4%B8%98",
+    "officialUrl": "https://izumi-ice.jp/", "lastVerified": "2026-10-08", "status": "verified"
+  },
+  {
+    "id": "14", "type": "food", "name": "鳥取牛骨拉麺 八起", "categories": ["食事"],
+    "description": "鳥取名物の牛骨ラーメンを楽しめる専門店。砂丘散策の合間にしっかり昼食を取りたい人にも向いています。",
+    "hours": "土日祝 11:00–15:00", "eventHours": "11:30–14:30", "price": "1,000〜2,000円程度",
+    "notices": ["水曜定休", "予約不可"], "halloween": false,
+    "location": {"latitude": 35.541882, "longitude": 134.236840},
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=%E9%B3%A5%E5%8F%96%E7%89%9B%E9%AA%A8%E6%8B%89%E9%BA%BA%20%E5%85%AB%E8%B5%B7%20%E9%B3%A5%E5%8F%96%E7%A0%82%E4%B8%98",
+    "officialUrl": null, "lastVerified": "2026-10-08", "status": "recheck"
+  },
+  {
+    "id": "15", "type": "food", "name": "砂丘コーヒー", "categories": ["カフェ・スイーツ", "軽食・テイクアウト"],
+    "description": "砂の美術館売店入口にあるテイクアウト店。コーヒーやソフトクリーム、サンデーなどを楽しめます。",
+    "hours": "土曜 9:00–18:00（砂の美術館売店営業時間を基準）", "eventHours": "11:30–14:30", "price": "〜1,000円程度",
+    "notices": ["テイクアウトのみ", "営業時間は砂の美術館売店の営業時間を基準としています"], "halloween": false,
+    "location": {"latitude": 35.539688, "longitude": 134.237546},
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=35.539688,134.237546",
+    "officialUrl": null, "lastVerified": "2026-10-08", "status": "recheck"
+  },
+  {
+    "id": "16", "type": "food", "name": "サンコスモス", "categories": ["軽食・テイクアウト", "お土産"],
+    "description": "砂丘前のお土産店。地元のお菓子やソフトクリームなどを販売しており、散策途中のちょっとした休憩にも利用できます。",
+    "hours": "10:00–17:00", "eventHours": "11:30–14:30", "price": "〜1,000円程度",
+    "notices": ["営業時間・営業日は開催直前に再確認してください"], "halloween": false,
+    "location": {"latitude": 35.541845, "longitude": 134.236753},
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=%E3%82%B5%E3%83%B3%E3%82%B3%E3%82%B9%E3%83%A2%E3%82%B9%20%E9%B3%A5%E5%8F%96%E7%A0%82%E4%B8%98",
+    "officialUrl": "http://suncosmos39.watson.jp/", "lastVerified": "2026-10-08", "status": "recheck"
+  },
+  {
+    "id": "A", "type": "sightseeing", "name": "馬の背", "categories": ["観光"],
+    "description": "鳥取砂丘を代表する絶景スポット。砂丘入口から砂の斜面を歩いて登ると、日本海と広大な砂丘を一望できます。",
+    "hours": "常時利用可", "eventHours": "11:30–14:30", "price": "無料",
+    "notices": ["砂上を歩くため、歩きやすい靴がおすすめです"], "halloween": false,
+    "location": {"latitude": 35.545417, "longitude": 134.230583},
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=%E9%B3%A5%E5%8F%96%E7%A0%82%E4%B8%98%20%E9%A6%AC%E3%81%AE%E8%83%8C",
+    "officialUrl": "https://www.torican.jp/spot/detail_3085.html", "lastVerified": "2026-10-08", "status": "verified"
+  },
+  {
+    "id": "B", "type": "sightseeing", "name": "鳥取砂丘ビジターセンター", "categories": ["観光"],
+    "description": "鳥取砂丘の地形・自然・動植物について学べる無料の案内施設です。",
+    "hours": "9:00–17:00", "eventHours": "11:30–14:30", "price": "無料", "notices": [], "halloween": true,
+    "location": {"latitude": 35.544033, "longitude": 134.236629},
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=%E9%B3%A5%E5%8F%96%E7%A0%82%E4%B8%98%E3%83%93%E3%82%B8%E3%82%BF%E3%83%BC%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC",
+    "officialUrl": "https://www.sakyu-vc.com/jp/visitor/", "lastVerified": "2026-10-08", "status": "verified"
+  },
+  {
+    "id": "C", "type": "sightseeing", "name": "鳥取砂丘 砂の美術館", "categories": ["観光", "お土産"],
+    "description": "砂を素材にした大型彫刻を展示する美術館。第17期「砂で世界旅行・スペイン」を開催中で、売店では砂丘関連のお土産も購入できます。",
+    "hours": "9:00–18:00（最終入館17:30）", "eventHours": "11:30–14:30", "price": "一般800円／小・中・高校生400円／未就学児無料",
+    "notices": ["最終入館17:30", "館内飲食不可"], "halloween": false,
+    "location": {"latitude": 35.539628, "longitude": 134.238349},
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=%E9%B3%A5%E5%8F%96%E7%A0%82%E4%B8%98%20%E7%A0%82%E3%81%AE%E7%BE%8E%E8%A1%93%E9%A4%A8",
+    "officialUrl": "https://www.sand-museum.jp/", "lastVerified": "2026-10-08", "status": "verified"
+  },
+  {
+    "id": "D", "type": "sightseeing", "name": "砂丘観光リフト", "categories": ["観光"],
+    "description": "砂丘センターと砂丘側を結ぶ観光リフト。片道約5分で移動でき、砂丘や日本海を眺めながら空中散歩を楽しめます。",
+    "hours": "9:30–16:00", "eventHours": "11:30–14:30", "price": "大人 往復500円／片道300円",
+    "notices": ["天候や機械整備などにより運休・時間変更となる場合があります"], "halloween": false,
+    "location": {"latitude": 35.541327, "longitude": 134.237229},
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=35.541327,134.237229",
+    "officialUrl": "https://www.tottorisakyu.com/13315.html", "lastVerified": "2026-10-08", "status": "verified"
+  },
+  {
+    "id": "E", "type": "sightseeing", "name": "砂丘センター 眺望テラス", "categories": ["観光"],
+    "description": "砂丘センター屋上にある無料の展望スポット。鳥取砂丘と日本海を高台から見渡せます。",
+    "hours": "施設営業時間 9:00–17:00", "eventHours": "11:30–14:30", "price": "無料", "notices": [], "halloween": false,
+    "location": {"latitude": 35.541440, "longitude": 134.238906},
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=%E7%A0%82%E4%B8%98%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC%20%E7%9C%BA%E6%9C%9B%E3%83%86%E3%83%A9%E3%82%B9",
+    "officialUrl": "https://www.tottorisakyu.com/center/", "lastVerified": "2026-10-08", "status": "verified"
+  }
+]

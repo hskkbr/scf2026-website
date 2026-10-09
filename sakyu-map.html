@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SCF2026・10月24日の鳥取砂丘観光に使える飲食店・観光スポット・イベントのマップ。">
+    <title>鳥取砂丘 Lunch &amp; Sightseeing Map - SCF2026</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+    <link rel="stylesheet" href="vendor/leaflet.markercluster/MarkerCluster.css">
+    <link rel="stylesheet" href="sakyu-map.css">
+    <link rel="stylesheet" href="mobile-navigation.css">
+    <script defer src="vendor/leaflet/leaflet.js"></script>
+    <script defer src="vendor/leaflet.markercluster/leaflet.markercluster.js"></script>
+    <script defer src="mobile-navigation.js"></script>
+    <script defer src="sakyu-map.js"></script>
+</head>
+<body class="sakyu-page">
+    <a class="skip-link" href="#map-app">マップ・リストの操作へスキップ</a>
+    <header>
+        <p class="map-brand">SCF2026</p>
+        <h1>鳥取砂丘 <span>Lunch &amp; Sightseeing Map</span></h1>
+        <p><time datetime="2026-10-24">2026.10.24 Sat.</time> <span class="map-date">11:30–14:30</span></p>
+    </header>
+    <nav aria-label="メインナビゲーション">
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+            <span class="nav-toggle-label">メニュー</span>
+            <span class="nav-toggle-icon" aria-hidden="true">☰</span>
+        </button>
+        <ul id="nav-links">
+            <li><a href="index.html">トップページへ戻る</a></li>
+            <li><a href="access.html">会場アクセス</a></li>
+            <li><a href="sakyu-map.html" aria-current="page">鳥取砂丘マップ</a></li>
+        </ul>
+    </nav>
+    <main class="container" id="map-app" tabindex="-1">
+        <noscript><p class="map-message">地図・リストを表示するには、ブラウザのJavaScriptを有効にしてください。</p></noscript>
+        <fieldset class="map-controls" id="map-controls" disabled>
+            <legend class="visually-hidden">表示方法と絞り込み</legend>
+            <div class="view-switch" role="group" aria-label="表示方法">
+                <button type="button" data-view="map" aria-pressed="true" aria-controls="map-panel">マップ</button>
+                <button type="button" data-view="list" aria-pressed="false" aria-controls="list-panel">リスト</button>
+            </div>
+            <div class="filter-row main-filters" role="group" aria-label="メインフィルター">
+                <button type="button" data-filter="all" aria-pressed="true">すべて</button>
+                <button type="button" data-filter="food" aria-pressed="false">飲食店</button>
+                <button type="button" data-filter="sightseeing" aria-pressed="false">観光</button>
+                <button type="button" data-filter="event" aria-pressed="false">イベント</button>
+            </div>
+            <div class="filter-row sub-filters" id="food-filters" role="group" aria-label="飲食店のカテゴリ" hidden>
+                <button type="button" data-category="all" aria-pressed="true">すべて</button>
+                <button type="button" data-category="食事" aria-pressed="false">食事</button>
+                <button type="button" data-category="カフェ・スイーツ" aria-pressed="false">カフェ・スイーツ</button>
+                <button type="button" data-category="軽食・テイクアウト" aria-pressed="false">軽食・テイクアウト</button>
+                <button type="button" data-category="お土産" aria-pressed="false">お土産</button>
+            </div>
+        </fieldset>
+        <p class="results-count" id="results-count" role="status" aria-live="polite">データを読み込んでいます…</p>
+        <div class="map-message" id="load-error" role="alert" hidden>
+            <p>データを読み込めませんでした。通信環境を確認して再度お試しください。</p>
+            <button type="button" id="reload-data">再読み込み</button>
+        </div>
+        <div id="map-panel" role="region" aria-label="鳥取砂丘のマップ">
+            <div class="map-toolbar">
+                <div class="map-legend" aria-label="マーカーの凡例">
+                    <span><b class="legend-id food">01</b> 飲食店</span>
+                    <span><b class="legend-id sightseeing">A</b> 観光</span>
+                    <span><b class="event-badge">EVENT</b> 開催会場</span>
+                </div>
+                <button type="button" id="fit-map">全地点を表示</button>
+            </div>
+            <div id="sakyu-map" aria-label="鳥取砂丘マップ。矢印キーで移動、プラス・マイナスキーで拡大・縮小できます。" aria-describedby="map-help"></div>
+            <p class="map-message" id="map-error" role="status" hidden></p>
+            <p class="map-help" id="map-help">数字がまとまったピンをタップすると、近くの地点が開きます。各IDから詳細を確認できます。</p>
+        </div>
+        <div id="list-panel" role="region" aria-label="スポットとイベントの一覧" hidden></div>
+    </main>
+    <dialog class="detail-sheet" id="detail-sheet" aria-labelledby="sheet-title">
+        <div class="sheet-toolbar"><button type="button" id="close-sheet" autofocus aria-label="詳細を閉じる">閉じる <span aria-hidden="true">×</span></button></div>
+        <div class="sheet-content" id="sheet-content"></div>
+    </dialog>
+    <footer>
+        <p id="last-verified">情報最終確認：—</p>
+        <p>営業時間・イベント内容等は変更される場合があります。<br>最新情報は各施設・店舗の公式情報をご確認ください。</p>
+        <p>&copy; 2026 中四国超伝導委員会 (TSC). All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

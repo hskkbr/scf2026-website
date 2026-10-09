@@ -1,0 +1,272 @@
+/* Existing SCF secondary-page shell, reused from poster.html. Loaded only by sakyu-map.html. */
+
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2b6cb0;
+            --accent-color: #3182ce;
+            --text-color: #2d3748;
+            --bg-color: #f7fafc;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            margin: 0.5rem 0 0 0;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        nav {
+            background-color: var(--secondary-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            display: block;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        nav a:hover {
+            background-color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            scroll-margin-top: 4rem;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+            font-size: 1.6rem;
+        }
+
+        .btn {
+            display: inline-block;
+            box-sizing: border-box;
+            max-width: 100%;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: bold;
+            transition: background-color 0.2s;
+            margin-top: 0.5rem;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-color);
+        }
+
+        .pdf-note {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 1.5rem 1rem;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav a {
+                padding: 0.6rem 1rem;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+        }
+
+/* Map-only additions. Keep SCF's palette, typeface, width and 768px breakpoint. */
+.sakyu-page {
+    --border-color: #e2e8f0;
+    --sand-color: #f7f2e8;
+    --food-color: var(--secondary-color);
+    --sightseeing-color: #276749;
+    --muted-color: #4a5568;
+}
+.sakyu-page *, .sakyu-page *::before, .sakyu-page *::after { box-sizing: border-box; }
+.sakyu-page [hidden] { display: none !important; }
+.sakyu-page button, .sakyu-page a { touch-action: manipulation; }
+.sakyu-page button { font: inherit; cursor: pointer; }
+.sakyu-page button:disabled { cursor: wait; opacity: .6; }
+.sakyu-page :focus-visible { outline: 3px solid var(--primary-color); outline-offset: 3px; }
+.sakyu-page nav :focus-visible, .sakyu-page footer :focus-visible { outline-color: white; }
+.sakyu-page .map-brand { font-weight: bold; letter-spacing: .08em; margin: 0 0 .5rem; }
+.sakyu-page header h1 { font-size: 1.8rem; }
+.sakyu-page header h1 span { display: inline-block; }
+.sakyu-page .map-date { display: inline-block; margin-left: .75rem; }
+.sakyu-page nav a[aria-current] { background: var(--primary-color); }
+.sakyu-page .container { margin-top: 1.5rem; }
+.visually-hidden, .skip-link:not(:focus) {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+.skip-link:focus { position: fixed; z-index: 2000; top: .5rem; left: .5rem; background: white; padding: .75rem; }
+.map-controls { border: 0; padding: 0; margin: 0; min-width: 0; }
+.view-switch { display: grid; grid-template-columns: 1fr 1fr; padding: 4px; border-radius: 8px; background: var(--border-color); }
+.view-switch button, .filter-row button, .map-toolbar button, .map-message button, .sheet-toolbar button {
+    min-height: 44px; border: 1px solid var(--border-color); padding: .5rem 1rem;
+    border-radius: 6px; color: var(--primary-color); background: white; font-weight: bold;
+}
+.view-switch button { border-color: transparent; background: transparent; }
+.view-switch button[aria-pressed="true"], .filter-row button[aria-pressed="true"] { background: var(--secondary-color); color: white; border-color: var(--secondary-color); }
+.filter-row { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+.main-filters button { flex: 1; padding-inline: .6rem; }
+.sub-filters { padding: .75rem; background: var(--sand-color); border-radius: 8px; }
+.sub-filters button { padding-inline: .75rem; font-size: .95rem; }
+.results-count { margin: 1rem 0 .6rem; font-size: .95rem; color: var(--muted-color); }
+.map-toolbar { display: flex; align-items: center; justify-content: space-between; gap: .5rem; flex-wrap: wrap; margin-bottom: .75rem; }
+.map-toolbar button { font-size: .9rem; }
+.map-legend { display: flex; flex-wrap: wrap; gap: .5rem 1rem; font-size: .875rem; align-items: center; }
+.map-legend > span { display: inline-flex; gap: .35rem; align-items: center; }
+.legend-id { display: inline-flex; justify-content: center; align-items: center; color: white; width: 28px; height: 28px; border-radius: 5px; }
+.food { background: var(--food-color); }
+.sightseeing { background: var(--sightseeing-color); }
+#sakyu-map { height: 560px; height: clamp(420px, 62svh, 650px); width: 100%; border: 1px solid var(--border-color); border-radius: 8px; isolation: isolate; background: var(--sand-color); }
+.sakyu-page .leaflet-container { font: inherit; }
+.sakyu-page .leaflet-control-zoom a { width: 44px; height: 44px; line-height: 44px; }
+.sakyu-page .leaflet-control-attribution { font-size: 11px; }
+.sakyu-page .leaflet-popup-content { margin: 16px; line-height: 1.6; }
+.sakyu-page .leaflet-popup-content p { margin: .3rem 0; }
+.sakyu-page .leaflet-popup-close-button { width: 44px; height: 44px; font-size: 24px; line-height: 40px; }
+.popup-title { display: block; padding-right: 1.25rem; }
+.map-help { font-size: .9rem; color: var(--muted-color); margin-top: .75rem; }
+.spot-marker { background: transparent; border: 0; }
+.marker-label {
+    display: flex; width: 44px; height: 44px; align-items: center; justify-content: center;
+    border: 3px solid white; border-radius: 9px; color: white; font-size: 16px; font-weight: bold;
+    box-shadow: 0 2px 6px #0005; position: relative;
+}
+.marker-label.sightseeing { border-radius: 50%; }
+.spot-marker.is-selected .marker-label { outline: 3px solid var(--primary-color); outline-offset: 2px; }
+.marker-event { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); font-size: 9px; line-height: 16px; padding: 0 4px; background: var(--primary-color); border: 1px solid white; border-radius: 4px; color: white; }
+.cluster-marker { display: flex; align-items: center; justify-content: center; background: white; border: 3px solid var(--primary-color); border-radius: 50%; color: var(--primary-color); box-shadow: 0 2px 6px #0003; font-weight: bold; }
+.cluster-marker span { display: flex; flex-direction: column; text-align: center; line-height: 1.1; }
+.cluster-marker small { font-size: 10px; margin-top: 2px; }
+.list-heading { font-size: 1.25rem; margin: 1.5rem 0 .5rem; }
+.compact-row { background: white; border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; margin-bottom: .6rem; overflow-wrap: anywhere; }
+.row-heading { display: flex; gap: .65rem; align-items: baseline; margin: 0 0 .35rem; font-size: 1.1rem; color: var(--primary-color); }
+.spot-id { flex: none; display: inline-block; font-size: .95rem; font-weight: bold; color: white; padding: .15rem .5rem; border-radius: 4px; }
+.event-id { background: var(--primary-color); }
+.row-meta { color: var(--muted-color); font-size: .95rem; margin: .25rem 0; }
+.scf-hours { color: var(--primary-color); font-weight: bold; background: var(--bg-color); border-left: 2px solid var(--secondary-color); border-radius: 4px; }
+p.scf-hours { display: flex; align-items: baseline; flex-wrap: wrap; gap: .2rem .6rem; margin: .4rem 0; padding: .35rem .5rem; font-size: .95rem; }
+.scf-hours-label, .time-range { white-space: nowrap; }
+.scf-hours-service { display: block; }
+.early-closing-notice { color: var(--primary-color); font-size: .9rem; font-weight: bold; margin: .3rem 0; }
+.row-summary { margin: .4rem 0; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+.badges { display: flex; flex-wrap: wrap; gap: .35rem; align-items: center; margin: .5rem 0; }
+.category-badge, .halloween-badge, .event-badge { display: inline-block; border-radius: 4px; padding: .15rem .45rem; font-size: .8rem; font-weight: bold; }
+.category-badge { background: var(--bg-color); border: 1px solid var(--border-color); }
+.halloween-badge { background: #feebc8; color: #744210; }
+.event-badge { background: var(--primary-color); color: white; }
+.sakyu-page .btn, .detail-toggle { font: inherit; font-weight: bold; border: 1px solid var(--secondary-color); min-height: 44px; padding: .5rem .85rem; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; line-height: 1.5; }
+.detail-toggle { background: white; color: var(--secondary-color); margin-top: .5rem; }
+.detail-toggle:hover { background: var(--bg-color); }
+.accordion-content { border-top: 1px solid var(--border-color); margin-top: 1rem; padding-top: .75rem; }
+.detail-description { margin: .5rem 0 1rem; }
+.detail-facts { margin: .5rem 0 1rem; }
+.detail-facts > div { display: grid; grid-template-columns: 7.5em minmax(0, 1fr); border-bottom: 1px solid var(--border-color); padding: .65rem 0; gap: .5rem; }
+.detail-facts > .scf-hours { padding-inline: .5rem; }
+.detail-facts dt { color: var(--primary-color); font-weight: bold; }
+.detail-facts dd { margin: 0; }
+.detail-notices { background: var(--sand-color); border-left: 4px solid #976227; border-radius: 4px; padding: .85rem; margin: 1rem 0; }
+.detail-notices p { margin: 0 0 .4rem; font-weight: bold; color: #744210; }
+.detail-notices ul { padding: 0; margin: 0; list-style: none; }
+.detail-notices li { margin: .4rem 0; display: flex; gap: .5rem; }
+.detail-notices li::before { content: "⚠"; color: #744210; flex: none; }
+.detail-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0 .5rem; }
+.detail-actions .btn { margin: 0; }
+.detail-actions .btn-secondary { color: var(--secondary-color); background: white; }
+.related-events { border-top: 3px solid var(--border-color); padding-top: 1rem; margin-top: 1.5rem; }
+.related-events > h3 { margin-top: 0; font-size: 1.1rem; color: var(--primary-color); }
+.detail-sheet { color: var(--text-color); background: white; padding: 0; border: 0; border-radius: 12px; width: min(640px, calc(100% - 2rem)); max-width: 100%; max-height: 85vh; max-height: 85dvh; overflow-y: auto; overscroll-behavior: contain; box-shadow: 0 8px 40px #0004; }
+.detail-sheet::backdrop { background: #10243d99; }
+.sakyu-page:has(.detail-sheet[open]) { overflow: hidden; }
+.sheet-toolbar { display: flex; justify-content: flex-end; padding: .5rem 1rem; position: sticky; top: 0; background: white; border-bottom: 1px solid var(--border-color); z-index: 1; }
+.sheet-toolbar button { display: flex; align-items: center; gap: 1rem; }
+.sheet-content { padding: 1rem 1.5rem 1.5rem; overflow-wrap: anywhere; }
+.sheet-content h2 { font-size: 1.4rem; line-height: 1.5; }
+.map-message { padding: 1rem; border: 1px solid var(--border-color); border-radius: 8px; background: var(--sand-color); }
+@media (max-width: 768px) {
+    .sakyu-page .container { padding: 0 1rem; margin-top: 1rem; }
+    .sakyu-page header h1 { font-size: 1.4rem; }
+    .sakyu-page header h1 span { display: block; }
+    .sakyu-page .map-brand { font-size: 1rem; }
+    .sakyu-page .map-date { margin-left: .4rem; }
+    .filter-row { gap: .4rem; }
+    .detail-sheet { margin: auto 0 0; width: 100%; max-height: 85vh; max-height: 85dvh; border-radius: 16px 16px 0 0; padding-bottom: env(safe-area-inset-bottom); }
+    .sheet-content { padding: 1rem; }
+    .detail-facts > div { grid-template-columns: 1fr; gap: .2rem; }
+    .detail-actions { flex-direction: column; }
+    .detail-actions .btn { width: 100%; }
+    .compact-row { padding: .85rem; }
+    .sakyu-page footer { margin-top: 2rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .sakyu-page *, .sakyu-page *::before, .sakyu-page *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
