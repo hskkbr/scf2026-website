@@ -121,6 +121,92 @@
             margin-top: 0.5rem;
         }
 
+        .poster-list-note {
+            color: #4a5568;
+            font-size: 0.95rem;
+        }
+
+        .poster-schedule {
+            margin: 1rem 0;
+        }
+
+        .poster-schedule > div {
+            display: grid;
+            grid-template-columns: 14rem minmax(0, 1fr);
+            gap: 0.5rem 1.25rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .poster-schedule dt {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .poster-schedule dd {
+            margin: 0;
+        }
+
+        .poster-schedule-note {
+            color: #4a5568;
+            font-size: 0.9rem;
+        }
+
+        .poster-list {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0 0;
+        }
+
+        .poster-item {
+            display: grid;
+            grid-template-columns: 3rem minmax(0, 1fr);
+            gap: 1.25rem;
+            padding: 1.5rem 0;
+            border-top: 1px solid #e2e8f0;
+            scroll-margin-top: 5rem;
+        }
+
+        .poster-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            align-self: start;
+            min-height: 3rem;
+            border-radius: 6px;
+            background-color: #edf2f7;
+            color: var(--secondary-color);
+            font-size: 1.15rem;
+            font-weight: bold;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .poster-title {
+            margin: 0;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            line-height: 1.75;
+            overflow-wrap: anywhere;
+        }
+
+        .poster-title sub,
+        .poster-title sup {
+            font-size: 0.75em;
+            line-height: 0;
+        }
+
+        .poster-presenter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.25rem 1rem;
+            margin: 0.5rem 0 0;
+            font-size: 0.95rem;
+        }
+
+        .poster-affiliation {
+            color: #4a5568;
+        }
+
         footer {
             background-color: var(--primary-color);
             color: white;
@@ -143,6 +229,30 @@
             section {
                 padding: 1.5rem;
             }
+
+            .poster-item {
+                grid-template-columns: 2.25rem minmax(0, 1fr);
+                gap: 0.75rem;
+                padding: 1.25rem 0;
+            }
+
+            .poster-number {
+                min-height: 2.25rem;
+                font-size: 1rem;
+            }
+
+            .poster-title {
+                font-size: 1rem;
+            }
+
+            .poster-presenter {
+                flex-direction: column;
+                gap: 0.125rem;
+            }
+
+            .poster-schedule > div {
+                grid-template-columns: minmax(0, 1fr);
+            }
         }
     </style>
     <link rel="stylesheet" href="mobile-navigation.css">
@@ -160,17 +270,267 @@
         </button>
         <ul id="nav-links">
             <li><a href="index.html">トップページへ戻る</a></li>
+            <li><a href="program_scf2026.html">プログラム</a></li>
             <li><a href="#poster-session">ポスターセッションについて</a></li>
+            <li><a href="#poster-presentations">ポスター発表一覧</a></li>
         </ul>
     </nav>
 
     <main class="container">
         <section id="poster-session" aria-labelledby="poster-heading">
             <h2 id="poster-heading">ポスターセッションについて</h2>
+            <h3>発表時間</h3>
+            <p>ポスター発表は、2026年10月24日（土）に奇数番・偶数番に分かれて行います。</p>
+            <dl class="poster-schedule">
+                <div>
+                    <dt><time datetime="2026-10-24T08:45">10月24日（土）8:45</time>〜</dt>
+                    <dd>ポスター著者による正規講演時間（奇数番）</dd>
+                </div>
+                <div>
+                    <dt><time datetime="2026-10-24T09:45">10月24日（土）9:45</time>〜</dt>
+                    <dd>ポスター著者による正規講演時間（偶数番）</dd>
+                </div>
+            </dl>
+            <p class="poster-schedule-note">時刻は開始時刻です。研究会全体の日程は<a href="program_scf2026.html">詳細プログラム</a>をご覧ください。<br>
+                概要の公開はSCF初日となります。</p>
+
+            <h3>学生ポスター賞</h3>
             <p>本研究会では、優秀な学生発表をたたえる「学生ポスター賞」を設けています。<br>
                 評価基準および投票方法については、以下の資料をご確認ください。</p>
             <a class="btn" href="documents/poster-award-guidelines.pdf" target="_blank" rel="noopener" aria-describedby="pdf-note">学生ポスター賞の評価基準・投票方法（PDF）</a>
             <p class="pdf-note" id="pdf-note">PDFは新しいタブで開きます。</p>
+        </section>
+
+        <section id="poster-presentations" aria-labelledby="poster-list-heading">
+            <h2 id="poster-list-heading">ポスター発表一覧</h2>
+            <p class="poster-list-note">全32件・番号順（敬称略）<br>
+                ポスターへのポスター番号の掲載は求めません。</p>
+            <ol class="poster-list" role="list">
+                <li class="poster-item" id="poster-01">
+                    <span class="poster-number">01</span>
+                    <div>
+                        <h3 class="poster-title">ベイズ最適化を用いた新規超伝導物質の理論的探索</h3>
+                        <p class="poster-presenter"><span>庄司 悠真</span><span class="poster-affiliation">鳥取大工M2</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-02">
+                    <span class="poster-number">02</span>
+                    <div>
+                        <h3 class="poster-title">軌道場行列記述子を用いた超伝導転移温度の機械学習予測</h3>
+                        <p class="poster-presenter"><span>Lu Shaocong</span><span class="poster-affiliation">東京大学</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-03">
+                    <span class="poster-number">03</span>
+                    <div>
+                        <h3 class="poster-title">遷移金属錯体塩を利用したアンモニア貯蔵材料の合成の試み</h3>
+                        <p class="poster-presenter"><span>立山 河</span><span class="poster-affiliation">九工大工B4</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-04">
+                    <span class="poster-number">04</span>
+                    <div>
+                        <h3 class="poster-title">Hidden-ladder系物質Sr<sub>3</sub>Cr<sub>2</sub>O<sub>7</sub>におけるincipient band超伝導の圧力依存性</h3>
+                        <p class="poster-presenter"><span>中谷 一揮</span><span class="poster-affiliation">阪大理M1</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-05">
+                    <span class="poster-number">05</span>
+                    <div>
+                        <h3 class="poster-title">ホールドープ系SrCuO<sub>2</sub>薄膜における超伝導の理論研究</h3>
+                        <p class="poster-presenter"><span>田中 尚岳</span><span class="poster-affiliation">鳥取大工D1</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-06">
+                    <span class="poster-number">06</span>
+                    <div>
+                        <h3 class="poster-title">高圧下水素化物超伝導体における電子状態の遍歴化傾向の理論解析</h3>
+                        <p class="poster-presenter"><span>与那覇 玲</span><span class="poster-affiliation">慶應大理工B4</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-07">
+                    <span class="poster-number">07</span>
+                    <div>
+                        <h3 class="poster-title">無限層ニッケル酸化物における高圧下高温超伝導と電子相関効果の理論的解析</h3>
+                        <p class="poster-presenter"><span>関 真日琉</span><span class="poster-affiliation">鳥取大工M1</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-08">
+                    <span class="poster-number">08</span>
+                    <div>
+                        <h3 class="poster-title">層状窒化ハロゲン化物の合成</h3>
+                        <p class="poster-presenter"><span>宮川 大英</span><span class="poster-affiliation">九工大工B4</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-09">
+                    <span class="poster-number">09</span>
+                    <div>
+                        <h3 class="poster-title">常圧下La<sub>3</sub>Ni<sub>2</sub>O<sub>6</sub>Hにおける層間ペアリングによるs波超伝導の可能性に関する理論研究</h3>
+                        <p class="poster-presenter"><span>山野 健太</span><span class="poster-affiliation">阪大理M2</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-10">
+                    <span class="poster-number">10</span>
+                    <div>
+                        <h3 class="poster-title">二層型ニッケル酸化物の理論的物質設計に向けた層間ホッピングと超伝導特性の解析</h3>
+                        <p class="poster-presenter"><span>森本 祥太朗</span><span class="poster-affiliation">鳥取大工B4</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-11">
+                    <span class="poster-number">11</span>
+                    <div>
+                        <h3 class="poster-title">補間分解とFFTを用いたツイスト2層グラフェンのFock交換計算手法の開発</h3>
+                        <p class="poster-presenter"><span>伊藤 純也</span><span class="poster-affiliation">埼玉大理工M1</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-12">
+                    <span class="poster-number">12</span>
+                    <div>
+                        <h3 class="poster-title">パルスレーザー堆積法を用いたニッケル酸化物La<sub>4</sub>Ni<sub>3</sub>O<sub>10</sub>薄膜の作製</h3>
+                        <p class="poster-presenter"><span>長谷川 論</span><span class="poster-affiliation">米子高専</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-13">
+                    <span class="poster-number">13</span>
+                    <div>
+                        <h3 class="poster-title">ピラミッド型配位を持つ軌道空間バイレイヤー超伝導体の理論設計</h3>
+                        <p class="poster-presenter"><span>西 佑恭</span><span class="poster-affiliation">鳥取大工M1</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-14">
+                    <span class="poster-number">14</span>
+                    <div>
+                        <h3 class="poster-title">CuサイトをNiに置換したYBa<sub>2</sub>Cu<sub>3</sub>O<sub>7-δ</sub>の作製の試み</h3>
+                        <p class="poster-presenter"><span>毛利 暖</span><span class="poster-affiliation">山梨大M2</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-15">
+                    <span class="poster-number">15</span>
+                    <div>
+                        <h3 class="poster-title">特異モード展開汎関数くりこみ群法による2次元有機超伝導体の感受率の最適化</h3>
+                        <p class="poster-presenter"><span>今井 来美</span><span class="poster-affiliation">奈良女理D1</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-16">
+                    <span class="poster-number">16</span>
+                    <div>
+                        <h3 class="poster-title">第一原理動的横スピン感受率によるFe薄膜及びFe/MgO界面の磁気励起スペクトルの解析</h3>
+                        <p class="poster-presenter"><span>中西 樹</span><span class="poster-affiliation">金沢大院自然M2</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-17">
+                    <span class="poster-number">17</span>
+                    <div>
+                        <h3 class="poster-title">ウルトラノーダル状態を示す鉄系超伝導体FeSe<sub>1-x</sub>S<sub>x</sub>の高置換領域における比熱測定</h3>
+                        <p class="poster-presenter"><span>北西 優弥</span><span class="poster-affiliation">岡山大院自然D1</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-18">
+                    <span class="poster-number">18</span>
+                    <div>
+                        <h3 class="poster-title">ホールドープLa<sub>3</sub>Ni<sub>2</sub>O<sub>6</sub>における超伝導の可能性：軌道空間二層モデルの候補物質としての理論的研究</h3>
+                        <p class="poster-presenter"><span>神山 周</span><span class="poster-affiliation">阪大理D2</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-19">
+                    <span class="poster-number">19</span>
+                    <div>
+                        <h3 class="poster-title">(La, R)<sub>3</sub>Ni<sub>2</sub>O<sub>7</sub>(R=Pr, Nd, Sm)結晶の浮遊帯域溶融法(FZ法)による育成速度の検討</h3>
+                        <p class="poster-presenter"><span>加藤 華</span><span class="poster-affiliation">山梨大B4</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-20">
+                    <span class="poster-number">20</span>
+                    <div>
+                        <h3 class="poster-title">BaSi<sub>2</sub>の金属置換における横型熱電特性の理論的研究</h3>
+                        <p class="poster-presenter"><span>森 祐規</span><span class="poster-affiliation">島根大院自然M2</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-21">
+                    <span class="poster-number">21</span>
+                    <div>
+                        <h3 class="poster-title">ZrB<sub>12</sub> における従来型・非従来型超伝導の二面性</h3>
+                        <p class="poster-presenter"><span>菅家 結太郎</span><span class="poster-affiliation">横国大院理工M1</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-22">
+                    <span class="poster-number">22</span>
+                    <div>
+                        <h3 class="poster-title">イオン半径制御を用いた圧力誘起ニッケル酸化物超伝導の臨界圧力低減効果の理論的研究</h3>
+                        <p class="poster-presenter"><span>濵田 智彦</span><span class="poster-affiliation">鳥取大工M2</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-23">
+                    <span class="poster-number">23</span>
+                    <div>
+                        <h3 class="poster-title"><sup>139</sup>La-NMRで探るハニカム層状5d電子系La<sub>2</sub>IOS<sub>2</sub>の二段階異常と非従来型超伝導の可能性</h3>
+                        <p class="poster-presenter"><span>酒井 葵生</span><span class="poster-affiliation">京大院理D1</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-24">
+                    <span class="poster-number">24</span>
+                    <div>
+                        <h3 class="poster-title">壁紙粒子系の超伝導状態におけるオンサイト・オフサイトペアリング相の競合と表面エネルギースペクトルの解析</h3>
+                        <p class="poster-presenter"><span>依田 海斗</span><span class="poster-affiliation">名大理D1</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-25">
+                    <span class="poster-number">25</span>
+                    <div>
+                        <h3 class="poster-title">一軌道強束縛模型におけるゼーベック係数の異方性の研究</h3>
+                        <p class="poster-presenter"><span>金子 伊織</span><span class="poster-affiliation">電通大情報理工B4</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-26">
+                    <span class="poster-number">26</span>
+                    <div>
+                        <h3 class="poster-title">2層ハバードモデルに帰着可能な銅酸塩化物超伝導体の可能性</h3>
+                        <p class="poster-presenter"><span>牛尾 賢生</span><span class="poster-affiliation">鳥取大工D1</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-27">
+                    <span class="poster-number">27</span>
+                    <div>
+                        <h3 class="poster-title">2 層型銅酸塩化物における圧力効果に対する第一原理的理論研究</h3>
+                        <p class="poster-presenter"><span>坪之内 大和</span><span class="poster-affiliation">鳥取大工M1</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-28">
+                    <span class="poster-number">28</span>
+                    <div>
+                        <h3 class="poster-title">フラックス法によるMnX(NbS<sub>2</sub>)[X=0.25, 0.33]単結晶の育成</h3>
+                        <p class="poster-presenter"><span>堀口 耕平</span><span class="poster-affiliation">山梨大M1</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-29">
+                    <span class="poster-number">29</span>
+                    <div>
+                        <h3 class="poster-title">第一原理計算に基づくスピネル酸化物LiV<sub>2</sub>O<sub>4</sub>のスピン揺らぎ解析</h3>
+                        <p class="poster-presenter"><span>丹羽 陽弥</span><span class="poster-affiliation">金沢大院自然D1</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-30">
+                    <span class="poster-number">30</span>
+                    <div>
+                        <h3 class="poster-title">バイレイヤー型超伝導体における軌道反転の試み</h3>
+                        <p class="poster-presenter"><span>馬場 亮太</span><span class="poster-affiliation">鳥取大工B4</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-31">
+                    <span class="poster-number">31</span>
+                    <div>
+                        <h3 class="poster-title">アンモニア貯蔵を志向したシリコンクラスレートの単結晶合成</h3>
+                        <p class="poster-presenter"><span>大渕 貴久</span><span class="poster-affiliation">九工大工M2</span></p>
+                    </div>
+                </li>
+                <li class="poster-item" id="poster-32">
+                    <span class="poster-number">32</span>
+                    <div>
+                        <h3 class="poster-title">アンモニア反応炉を利用した窒化ジルコニウムの合成</h3>
+                        <p class="poster-presenter"><span>堀川 真靖</span><span class="poster-affiliation">九工大工M1</span></p>
+                    </div>
+                </li>
+            </ol>
         </section>
     </main>
 
