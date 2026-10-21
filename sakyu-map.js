@@ -36,35 +36,12 @@
     }
     const venueFor = (event) => spots.find((spot) => spot.id === event.venueRef);
     const eventsFor = (spot) => events.filter((event) => event.venueRef === spot.id);
-    const sessionTime = (session) => `${session.start}〜${session.end || ''}`;
-    const sessionsText = (event, availableOnly = false) => event.sessions
-        .filter((session) => !availableOnly || session.scfAvailable).map(sessionTime).join('／');
+    const descriptionFor = (item) => item.webDescription ?? item.description;
 
-    function scfHoursValue(value) {
-        const content = el('span', 'scf-hours-value');
-        // Keep each service on its own line and never break a time range midway.
-        value.split('／').forEach((part) => {
-            const line = el('span', 'scf-hours-service');
-            part.split(/(\d{1,2}:\d{2}[–〜-]\d{1,2}:\d{2})/).forEach((text, index) => {
-                line.append(index % 2 ? el('span', 'time-range', text) : document.createTextNode(text));
-            });
-            content.append(line);
-        });
-        return content;
-    }
-    function scfHours(value) {
-        const row = el('p', 'scf-hours');
-        row.append(el('span', 'scf-hours-label', 'SCF時間内'), scfHoursValue(value));
-        return row;
-    }
-    function earlyClosingNotice(spot) {
-        if (spot.type !== 'food') return null;
-        // Only quote explicit closing / last-order notices before the 14:30 SCF end.
-        // Do not infer deadlines from general warnings, limited stock or opening times.
-        return spot.notices.find((notice) => {
-            const time = notice.match(/(?:L\.O\.|営業は)(\d{1,2}):(\d{2})/);
-            return time && Number(time[1]) * 60 + Number(time[2]) < 14 * 60 + 30;
-        });
+    function visibleNotices(item) {
+        // Keep shared source data; the web map omits times, durations and waiting-time guidance.
+        return item.notices.filter((notice) =>
+            !/時間|\d{1,2}[:：]\d{2}|\d+時|\d+分|\d+秒|午前|午後|L\.O\.|最終入館/.test(notice));
     }
 
     function heading(item, tag = 'h3') {
@@ -82,20 +59,17 @@
     function facts(entries) {
         const dl = el('dl', 'detail-facts');
         entries.filter(([, value]) => value !== undefined && value !== null).forEach(([label, value]) => {
-            const isScfHours = label === 'SCF時間内';
-            const row = el('div', isScfHours ? 'scf-hours' : '');
-            const description = el('dd');
-            description.append(isScfHours ? scfHoursValue(value) : document.createTextNode(value));
-            row.append(el('dt', '', label), description);
+            const row = el('div');
+            row.append(el('dt', '', label), el('dd', '', value));
             dl.append(row);
         });
         return dl;
     }
-    function notices(item) {
+    function notices(entries) {
         const box = el('div', 'detail-notices');
         box.append(el('p', '', 'ご利用・参加にあたって'));
         const list = el('ul');
-        item.notices.forEach((notice) => list.append(el('li', '', notice)));
+        entries.forEach((notice) => list.append(el('li', '', notice)));
         box.append(list);
         return box;
     }
@@ -109,23 +83,20 @@
             content.append(title);
             if (!isEvent) content.append(badges(item));
         }
-        content.append(el('p', 'detail-description', item.description));
+        content.append(el('p', 'detail-description', descriptionFor(item)));
         content.append(facts(isEvent ? [
             ['開催日', item.date.replace(/-/g, '/')],
             ['会場', `${venue.id} ${venue.name}`],
-            ['開催時間', sessionsText(item)],
-            ['SCF時間内', item.scfEventHours],
             ['料金', item.price],
-            ['最終受付', item.lastEntry],
             ['受付・予約', item.reservation],
             ['天候', item.weatherPolicy],
             ['定員', item.capacity],
-            ['制作時間', item.duration],
             ['持ち帰り', item.takeHomeAllowed === false ? 'できません' : null]
         ] : [
-            ['通常営業時間', item.hours], ['SCF時間内', item.eventHours], ['価格帯', item.price]
+            ['価格帯', item.price]
         ]));
-        if (item.notices.length) content.append(notices(item));
+        const guidance = visibleNotices(item);
+        if (guidance.length) content.append(notices(guidance));
         const actions = el('div', 'detail-actions');
         actions.append(externalLink('Google Mapsで開く', venue.googleMapsUrl));
         if (isEvent) actions.append(externalLink('イベント詳細を見る', item.eventUrl, true));
@@ -152,16 +123,11 @@
         if (item.type === 'event') {
             const venue = venueFor(item);
             row.append(el('p', 'row-meta', `${venue.id} ${venue.name}`));
-            row.append(el('p', 'row-meta', `開催時間 ${sessionsText(item, true)}`));
-            row.append(scfHours(item.scfEventHours));
         } else {
             row.append(badges(item));
-            row.append(scfHours(item.eventHours));
-            const closingNotice = earlyClosingNotice(item);
-            if (closingNotice) row.append(el('p', 'early-closing-notice', `⚠ ${closingNotice}`));
         }
         row.append(el('p', 'row-meta', item.price));
-        row.append(el('p', 'row-summary', item.description));
+        row.append(el('p', 'row-summary', descriptionFor(item)));
         const content = el('div', 'accordion-content');
         content.id = `detail-${++detailSequence}`;
         content.hidden = true;
@@ -279,7 +245,6 @@
         const content = el('div');
         content.append(el('strong', 'popup-title', `${spot.id} ${spot.name}`));
         content.append(el('p', '', spot.categories.join('・')));
-        content.append(scfHours(spot.eventHours));
         const more = button('詳細を見る', () => openSheet(spot, more));
         more.setAttribute('aria-label', `${spot.id} ${spot.name}の詳細を見る`);
         content.append(more);

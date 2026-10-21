@@ -284,11 +284,11 @@ txt(417,yy-11,'雨天中止／砂像の持ち帰り不可',8,'#765020')
 txt(417,yy-21,'当日受付・先着順／定員10組／制作約30-40分',7.5,'#765020')
 txt(417,yy-31,'混雑時は待ち時間が発生する場合があります。',7.1,MUTED)
 
-# Gathering values intentionally left blank for later completion.
+# Gathering details are announced through Slack.
 box(677,24,142,89,'#ffffff',LINE,r=3)
-rule(677,69,819)
-txt(686,98,'集合場所',9,NAVY)
-txt(686,54,'集合時刻',9,NAVY)
+txt(686,98,'集合のご案内',9,NAVY)
+txt(686,73,'集合場所と集合時刻は',11,NAVY)
+txt(686,54,'Slackにて連絡します',11,NAVY)
 # QR occupies the top-right header; the gathering box uses its former space.
 url='https://hskkbr.github.io/scf2026-website/sakyu-map.html'
 qr=QrCodeWidget(url,barLevel='M',barBorder=4)
