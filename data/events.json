@@ -22,6 +22,7 @@
     "sessions": [{"start": "13:30", "end": "15:30", "scfAvailable": true}],
     "lastEntry": "15:00", "scfEventHours": "13:30〜14:30", "price": "1体500円（道具レンタル込み）＋砂の美術館入館券",
     "description": "高さ約20cmのミニ砂像を自分で制作できる体験ワークショップです。制作時間の目安は約30〜40分です。",
+    "webDescription": "高さ約20cmのミニ砂像を自分で制作できる体験ワークショップです。",
     "notices": ["雨天中止", "制作した砂像は持ち帰れません", "当日受付・先着順", "会場定員10組", "制作時間は約30〜40分", "参加費とは別に砂の美術館の入館券が必要です", "混雑時は待ち時間が発生する場合があります"],
     "weatherPolicy": "雨天中止", "reservation": "当日受付・先着順", "capacity": "10組", "duration": "約30〜40分", "takeHomeAllowed": false,
     "eventUrl": "https://www.sand-museum.jp/news/sazou_taiken2026/", "lastVerified": "2026-10-08", "status": "verified"

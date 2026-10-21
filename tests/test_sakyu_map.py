@@ -96,7 +96,7 @@ class SakyuMapTests(unittest.TestCase):
             if spot['officialUrl']:
                 expect(official).to_have_attribute('href', spot['officialUrl'])
             expect(row.locator('> .badges .halloween-badge')).to_have_count(1 if spot['halloween'] else 0)
-            expect(details.locator('.detail-description').first).to_have_text(spot['description'])
+            expect(details.locator('.detail-description').first).to_have_text(spot.get('webDescription', spot['description']))
             row.locator('> .detail-toggle').click()
         self.assertNotIn('recheck', self.page.locator('body').inner_text())
         self.assertNotIn('verified', self.page.locator('body').inner_text())
@@ -165,8 +165,10 @@ class SakyuMapTests(unittest.TestCase):
         self.click_filter('event')
         row = self.row('EV03')
         row.locator('> .detail-toggle').click()
-        for notice in EVENTS[2]['notices']:
-            expect(row.locator('.detail-notices')).to_contain_text(notice)
+        expect(row.locator('.detail-notices li')).to_have_text([
+            '雨天中止', '制作した砂像は持ち帰れません', '当日受付・先着順',
+            '会場定員10組', '参加費とは別に砂の美術館の入館券が必要です',
+        ])
         expect(row.get_by_role('link', name='イベント詳細を見る（新しいタブで開く）')).to_have_attribute('href', EVENTS[2]['eventUrl'])
         expect(row.get_by_role('link', name='イベント詳細を見る（新しいタブで開く）')).to_have_attribute('target','_blank')
         self.screenshot('mobile-event.png')
@@ -275,40 +277,46 @@ class SakyuMapTests(unittest.TestCase):
             self.screenshot('retina-map.png')
 
 
-    def test_08_scf_hours_and_early_closing_notices(self):
+    def test_08_all_time_information_is_hidden(self):
         self.click_view('list')
-        expected = {'01': 'レストラン営業は14:00まで', '02': 'レストラン営業は14:00まで',
-                    '06': 'L.O.13:30', '07': '料理L.O.14:00'}
-        for spot in SPOTS:
-            row = self.row(spot['id'])
-            expect(row.locator('> .scf-hours')).to_contain_text('SCF時間内')
-            expect(row.locator('> .early-closing-notice')).to_have_count(int(spot['id'] in expected))
-            if spot['id'] in expected:
-                expect(row.locator('> .early-closing-notice')).to_have_text('⚠ ' + expected[spot['id']])
+        hidden_notices = {
+            'レストラン営業は14:00まで', '売店は17:00まで営業', '営業時間が変更される場合があります',
+            '季節により営業時間が変更される場合があります', 'L.O.13:30', '料理L.O.14:00',
+            'L.O.16:30', '営業時間は砂の美術館売店の営業時間を基準としています',
+            '営業時間・営業日は開催直前に再確認してください', '最終入館17:30',
+            '天候や機械整備などにより運休・時間変更となる場合があります',
+            'SCFの砂丘観光時間内では13:30の回を観覧できます',
+            'SCFの砂丘観光時間内では午後の部に参加できます',
+            '制作時間は約30〜40分', '混雑時は待ち時間が発生する場合があります',
+        }
+        for item in SPOTS + EVENTS:
+            row = self.row(item['id'])
+            row.locator('> .detail-toggle').click()
+            details = row.locator('> .accordion-content > div')
+            expected = [notice for notice in item['notices'] if notice not in hidden_notices]
+            expect(details.locator(':scope > .detail-notices li')).to_have_text(expected)
+            expect(details.locator(':scope > .detail-notices')).to_have_count(int(bool(expected)))
+            expect(details.locator(':scope > .detail-description')).to_have_text(
+                item.get('webDescription', item['description']))
+            self.assertNotRegex(row.inner_text(), r'時間|最終受付|\d{1,2}[:：]\d{2}|\d+分')
+            row.locator('> .detail-toggle').click()
+        expect(self.page.locator('.scf-hours, .early-closing-notice')).to_have_count(0)
+        self.assertNotRegex(self.page.locator('body').inner_text(), r'時間|最終受付|\d{1,2}[:：]\d{2}|\d+分')
         for width in [360, 390, 430, 1440]:
             self.page.set_viewport_size({'width': width, 'height': 900})
             self.assert_no_overflow()
-            for sid in expected:
-                row = self.row(sid)
-                # Every time range occupies a single line, including split food/cafe hours.
-                self.assertTrue(row.locator('> .scf-hours .time-range').evaluate_all(
-                    '(nodes) => nodes.every(n => n.getClientRects().length === 1)'))
-                row.locator('> .detail-toggle').click()
-                expect(row.locator('.detail-facts > .scf-hours')).to_contain_text('SCF時間内')
-                spot = next(s for s in SPOTS if s['id'] == sid)
-                expect(row.locator('.detail-facts')).to_contain_text(spot['hours'])
-                for notice in spot['notices']:
-                    expect(row.locator('.detail-notices')).to_contain_text(notice)
-                self.assert_no_overflow()
-                row.locator('> .detail-toggle').click()
-            self.screenshot(f'scf-hours-list-{width}.png')
+            self.screenshot(f'hours-guidance-hidden-{width}.png')
         self.page.set_viewport_size({'width':360, 'height':800})
         self.row('06').locator('> .detail-toggle').click()
         self.row('06').get_by_role('button', name='地図で見る', exact=True).click()
-        expect(self.page.locator('.leaflet-popup .scf-hours')).to_contain_text('SCF時間内')
-        expect(self.page.locator('.leaflet-popup .scf-hours')).to_contain_text('11:30–13:30')
+        expect(self.page.locator('.leaflet-popup')).to_be_visible()
+        expect(self.page.locator('.leaflet-popup')).not_to_contain_text('SCF時間内')
         self.page.locator('.leaflet-popup button').click()
-        expect(self.page.locator('#detail-sheet .detail-facts > .scf-hours')).to_contain_text('11:30–13:30')
+        sheet = self.page.locator('#detail-sheet')
+        expect(sheet).to_be_visible()
+        self.assertNotRegex(sheet.inner_text(), r'時間|最終受付|\d{1,2}[:：]\d{2}|\d+分')
+        expect(sheet.locator('.detail-notices')).not_to_contain_text('L.O.13:30')
+        expect(sheet.locator('.detail-notices')).to_contain_text('1日50食限定')
         self.assert_no_overflow()
         self.page.keyboard.press('Escape')
         expect(self.page.locator('.leaflet-popup button')).to_be_focused()
