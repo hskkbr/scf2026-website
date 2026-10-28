@@ -126,6 +126,56 @@
             font-size: 0.95rem;
         }
 
+        .award-group {
+            margin-top: 1.75rem;
+        }
+
+        .award-group h3 {
+            color: var(--primary-color);
+            background-color: #edf2f7;
+            border-left: 4px solid var(--secondary-color);
+            padding: 0.6rem 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .award-group h3 small {
+            display: inline-block;
+            font-size: 0.85em;
+            font-weight: normal;
+        }
+
+        .award-recipients {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+            gap: 0.75rem 1.5rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .award-recipients li {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.25rem 1rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .award-recipients span {
+            color: #4a5568;
+            font-size: 0.95rem;
+        }
+
+        .award-reference {
+            margin-top: 2rem;
+        }
+
+        .award-reference summary {
+            cursor: pointer;
+            color: var(--secondary-color);
+        }
+
         .poster-schedule {
             margin: 1rem 0;
         }
@@ -271,12 +321,66 @@
         <ul id="nav-links">
             <li><a href="index.html">トップページへ戻る</a></li>
             <li><a href="program_scf2026.html">プログラム</a></li>
+            <li><a href="#poster-awards">受賞者一覧</a></li>
             <li><a href="#poster-session">ポスターセッションについて</a></li>
             <li><a href="#poster-presentations">ポスター発表一覧</a></li>
         </ul>
     </nav>
 
     <main class="container">
+        <section id="poster-awards" aria-labelledby="poster-awards-heading">
+            <h2 id="poster-awards-heading">学生ポスター賞等 受賞者のお知らせ</h2>
+            <p>SCF2026の学生ポスター賞、プロスペクト賞および委員長特別賞の受賞者が決定しました。受賞された皆様、おめでとうございます。</p>
+            <p>発表者の皆様ならびに審査・投票にご協力いただいた皆様に、厚く御礼申し上げます。</p>
+            <p>受賞者を以下に掲載します。発表題目を含む表彰一覧は、PDFでもご覧いただけます。</p>
+            <a class="btn" href="documents/poster-award-results.pdf" target="_blank" rel="noopener" aria-describedby="award-pdf-note">SCF2026 表彰一覧（PDF）</a>
+            <p class="pdf-note" id="award-pdf-note">PDFは新しいタブで開きます。</p>
+            <p class="poster-list-note">敬称略・掲載順は表彰資料に準拠。所属・学年は受賞時のものです。</p>
+
+            <div class="award-group">
+                <h3>ポスター賞 実験部門</h3>
+                <ul class="award-recipients" role="list">
+                    <li><strong>北西 優弥</strong><span>岡山大学 D1</span></li>
+                    <li><strong>毛利 暖</strong><span>山梨大学 M2</span></li>
+                    <li><strong>酒井 葵生</strong><span>京都大学 D1</span></li>
+                </ul>
+            </div>
+            <div class="award-group">
+                <h3>ポスター賞 理論部門</h3>
+                <ul class="award-recipients" role="list">
+                    <li><strong>山野 健太</strong><span>大阪大学 M2</span></li>
+                    <li><strong>西 佑恭</strong><span>鳥取大学 M1</span></li>
+                    <li><strong>今井 来美</strong><span>奈良女子大学 D1</span></li>
+                    <li><strong>伊藤 純也</strong><span>埼玉大学 M1</span></li>
+                    <li><strong>神山 周</strong><span>大阪大学 D2</span></li>
+                    <li><strong>中西 樹</strong><span>金沢大学 M2</span></li>
+                </ul>
+            </div>
+            <div class="award-group">
+                <h3>プロスペクト賞 実験部門 <small>（学部生最高得点）</small></h3>
+                <ul class="award-recipients" role="list">
+                    <li><strong>宮川 大英</strong><span>九州工業大学 B4</span></li>
+                </ul>
+            </div>
+            <div class="award-group">
+                <h3>プロスペクト賞 理論部門 <small>（学部生最高得点）</small></h3>
+                <ul class="award-recipients" role="list">
+                    <li><strong>森本 祥太朗</strong><span>鳥取大学 B4</span></li>
+                </ul>
+            </div>
+            <div class="award-group">
+                <h3>委員長特別賞</h3>
+                <ul class="award-recipients" role="list">
+                    <li><strong>長谷川 論</strong><span>米子高専</span></li>
+                </ul>
+            </div>
+
+            <details class="award-reference">
+                <summary>参考資料：学生ポスター賞の評価基準・投票方法</summary>
+                <p><a href="documents/poster-award-guidelines.pdf" target="_blank" rel="noopener">学生ポスター賞の評価基準・投票方法（PDF・新しいタブで開きます）</a></p>
+            </details>
+        </section>
+
         <section id="poster-session" aria-labelledby="poster-heading">
             <h2 id="poster-heading">ポスターセッションについて</h2>
             <h3>発表時間</h3>
@@ -294,11 +398,6 @@
             <p class="poster-schedule-note">時刻は開始時刻です。研究会全体の日程は<a href="program_scf2026.html">詳細プログラム</a>をご覧ください。<br>
                 概要の公開はSCF初日となります。</p>
 
-            <h3>学生ポスター賞</h3>
-            <p>本研究会では、優秀な学生発表をたたえる「学生ポスター賞」を設けています。<br>
-                評価基準および投票方法については、以下の資料をご確認ください。</p>
-            <a class="btn" href="documents/poster-award-guidelines.pdf" target="_blank" rel="noopener" aria-describedby="pdf-note">学生ポスター賞の評価基準・投票方法（PDF）</a>
-            <p class="pdf-note" id="pdf-note">PDFは新しいタブで開きます。</p>
         </section>
 
         <section id="poster-presentations" aria-labelledby="poster-list-heading">
